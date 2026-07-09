@@ -383,8 +383,6 @@ img{max-width:100%;height:auto}
 
       <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی دیابت</span><span class="ltr-text">Diabetes Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">دسته‌بندی باینری ریسک دیابت با داده‌های بالینی. مهندسی ویژگی، بالانس کلاس‌ها، ارزیابی پزشکی.</span><span class="ltr-text">Binary classification for diabetes risk. Feature engineering, class balancing, medical metrics.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Medical AI</span><span class="portfolio__tag">Imbalanced Data</span></div><a href="https://github.com/Arefmtl/Diabetes-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-    <div class="swiper-button-next"><i class="uil uil-angle-right-b swiper-portfolio-icon"></i></div>
-    <div class="swiper-button-prev"><i class="uil uil-angle-left-b swiper-portfolio-icon"></i></div>
     <div class="swiper-pagination"></div>
   </div>
 </section>
@@ -477,7 +475,7 @@ document.querySelectorAll('[data-target]').forEach(t=>t.addEventListener('click'
 }));
 
 // ── Swiper ──
-new Swiper('.swiper',{cssMode:true,loop:true,navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},pagination:{el:'.swiper-pagination',clickable:true}});
+new Swiper('.swiper',{cssMode:true,loop:true,mousewheel:true,pagination:{el:'.swiper-pagination',clickable:true}});
 
 // ── Scrollspy + effects ──
 const sc=document.querySelectorAll('section[id]');
