@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#112E81" />
+  <title>Portfolio Builder — Ali Kazemi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <style>
+    :root {
+      --first: #112e81;
+      --second: #4647ae;
+      --third: #4382df;
+      --light: #aaccd6;
+      --bg: #f5f7fc;
+      --card: #fff;
+      --text: #1a1a2e;
+      --muted: #666;
+      --font: 'Poppins', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 1.8rem; color: var(--first); display: flex; align-items: center; gap: .5rem; }
+    h1 small { font-size: 1rem; font-weight: 400; color: var(--muted); }
+    .subtitle { color: var(--muted); margin-bottom: 2rem; }
+    .lang-toggle {
+      display: inline-block; float: left; cursor: pointer;
+      padding: 4px 14px; border-radius: 20px; border: 1px solid var(--light);
+      font-size: .8rem; font-weight: 600; color: var(--first); background: white;
+    }
+    .lang-toggle:hover { background: var(--light); }
+
+    /* ── Steps ── */
+    .steps { display: flex; gap: .5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .step {
+      flex: 1; min-width: 90px; padding: .6rem .8rem; border-radius: var(--radius);
+      background: var(--card); border: 2px solid #ddd; text-align: center;
+      font-size: .8rem; font-weight: 500; transition: .3s; cursor: default;
+    }
+    .step.active { border-color: var(--first); color: var(--first); background: #eef4ff; }
+    .step.done { border-color: var(--third); color: var(--third); }
+    .step .num { display: inline-block; width: 22px; height: 22px; line-height: 22px; border-radius: 50%; background: #eee; font-size: .7rem; margin-inline-end: 4px; }
+    .step.active .num { background: var(--first); color: #fff; }
+    .step.done .num { background: var(--third); color: #fff; }
+
+    /* ── Form ── */
+    .card {
+      background: var(--card); border-radius: var(--radius); padding: 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 1.5rem;
+    }
+    .card h2 { font-size: 1.3rem; color: var(--first); margin-bottom: .3rem; }
+    .card .desc { color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .3rem; }
+    .form-group.full { grid-column: 1/-1; }
+    label { font-size: .8rem; font-weight: 500; color: var(--muted); }
+    input, textarea, select {
+      padding: .7rem .9rem; border: 1.5px solid #e0e0e0; border-radius: 8px;
+      font-family: var(--font); font-size: .9rem; transition: .2s; background: #fafcff;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--third); box-shadow: 0 0 0 3px rgba(67,130,223,.15); }
+    textarea { resize: vertical; min-height: 60px; }
+    .form-row { display: flex; gap: .5rem; align-items: center; }
+    .form-row input { flex: 1; }
+
+    /* ── Dynamic entries (skills, projects, certs) ── */
+    .entries { display: flex; flex-direction: column; gap: .8rem; }
+    .entry {
+      background: #f8faff; border: 1px solid #e8ecf5; border-radius: 8px;
+      padding: 1rem; display: grid; gap: .6rem;
+    }
+    .entry .entry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .entry .full { grid-column: 1/-1; }
+    .entry-remove {
+      background: none; border: none; color: #e44; cursor: pointer;
+      font-size: .8rem; justify-self: end;
+    }
+    .btn {
+      padding: .6rem 1.2rem; border-radius: 8px; font-family: var(--font);
+      font-weight: 500; font-size: .85rem; cursor: pointer; border: none;
+      transition: .2s; display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .btn-primary { background: var(--first); color: #fff; }
+    .btn-primary:hover { background: #0d2368; }
+    .btn-secondary { background: #eef4ff; color: var(--first); }
+    .btn-secondary:hover { background: #dce6fa; }
+    .btn-add { background: transparent; color: var(--third); border: 1.5px dashed var(--light); padding: .5rem 1rem; width: 100%; justify-content: center; }
+    .btn-add:hover { background: #f0f7ff; }
+
+    /* ── Navigation ── */
+    .nav-btns { display: flex; justify-content: space-between; margin-top: 1.5rem; }
+    .hidden { display: none; }
+
+    /* ── Output ── */
+    pre {
+      background: #1a1a2e; color: #aaccd6; padding: 1.2rem; border-radius: 8px;
+      font-family: var(--mono); font-size: .75rem; overflow-x: auto;
+      max-height: 400px; white-space: pre-wrap; word-break: break-all;
+    }
+    .output-actions { display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 12px;
+      background: var(--light); color: var(--first); font-size: .7rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .entry .entry-grid { grid-template-columns: 1fr; }
+      .steps { gap: .3rem; }
+      .step { min-width: 60px; font-size: .7rem; padding: .4rem; }
+    }
+
+    /* ── English mode ── */
+    [lang="en"] .rtl-only { display: none; }
+    [lang="fa"] .ltr-only { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>
+    🧩 Portfolio Builder
+    <small>— by Ali Kazemi</small>
+    <span class="lang-toggle" id="langToggle" onclick="toggleLang()">🇬🇧 EN</span>
+  </h1>
+  <p class="subtitle rtl-only">اطلاعات خود را وارد کنید و یک پورتفولیوی حرفه‌ای دریافت کنید</p>
+  <p class="subtitle ltr-only">Fill in your info and get a professional portfolio template</p>
+
+  <!-- Steps -->
+  <div class="steps" id="steps">
+    <div class="step active" data-step="1"><span class="num">1</span> <span class="rtl-only">اطلاعات شخصی</span><span class="ltr-only">Personal</span></div>
+    <div class="step" data-step="2"><span class="num">2</span> <span class="rtl-only">مهارت‌ها</span><span class="ltr-only">Skills</span></div>
+    <div class="step" data-step="3"><span class="num">3</span> <span class="rtl-only">پروژه‌ها</span><span class="ltr-only">Projects</span></div>
+    <div class="step" data-step="4"><span class="num">4</span> <span class="rtl-only">گواهینامه‌ها</span><span class="ltr-only">Certifications</span></div>
+    <div class="step" data-step="5"><span class="num">5</span> <span class="rtl-only">خروجی</span><span class="ltr-only">Output</span></div>
+  </div>
+
+  <!-- STEP 1: Personal Info -->
+  <div class="card step-panel" data-step="1">
+    <h2><span class="rtl-only">📋 اطلاعات شخصی</span><span class="ltr-only">📋 Personal Info</span></h2>
+    <p class="desc"><span class="rtl-only">نام، عنوان، بیوگرافی و لینک‌های اجتماعی خود را وارد کنید</span><span class="ltr-only">Your name, title, bio, and social links</span></p>
+    <div class="form-grid">
+      <div class="form-group"><label><span class="rtl-only">نام (فارسی)</span><span class="ltr-only">Name (Persian)</span></label><input id="fa_name" value="علی کاظمی" /></div>
+      <div class="form-group"><label><span class="rtl-only">نام (انگلیسی)</span><span class="ltr-only">Name (English)</span></label><input id="en_name" value="Ali Kazemi" /></div>
+      <div class="form-group"><label><span class="rtl-only">عنوان (فارسی)</span><span class="ltr-only">Title (Persian)</span></label><input id="fa_title" value="دانشمند داده و مهندس یادگیری ماشین" /></div>
+      <div class="form-group"><label><span class="rtl-only">عنوان (انگلیسی)</span><span class="ltr-only">Title (English)</span></label><input id="en_title" value="Data Scientist & ML Engineer" /></div>
+      <div class="form-group full"><label><span class="rtl-only">بیوگرافی (فارسی)</span><span class="ltr-only">Bio (Persian)</span></label><textarea id="fa_bio" rows="2">مهندس پزشکی حیات با تخصص در علم داده، یادگیری ماشین و توسعه وب.</textarea></div>
+      <div class="form-group full"><label><span class="rtl-only">بیوگرافی (انگلیسی)</span><span class="ltr-only">Bio (English)</span></label><textarea id="en_bio" rows="2">Biomedical engineer specialized in data science, ML, and web dev.</textarea></div>
+      <div class="form-group"><label>LinkedIn</label><input id="linkedin" value="https://linkedin.com/in/alikazemi" /></div>
+      <div class="form-group"><label>GitHub</label><input id="github" value="https://github.com/Arefmtl" /></div>
+      <div class="form-group"><label><span class="rtl-only">موقعیت (فارسی)</span><span class="ltr-only">Location (Persian)</span></label><input id="fa_loc" value="شیراز، ایران" /></div>
+      <div class="form-group"><label><span class="rtl-only">موقعیت (انگلیسی)</span><span class="ltr-only">Location (English)</span></label><input id="en_loc" value="Shiraz, Iran" /></div>
+      <div class="form-group"><label>Email</label><input id="email" value="arefkazemi42@gmail.com" /></div>
+      <div class="form-group"><label><span class="rtl-only">تلفن</span><span class="ltr-only">Phone</span></label><input id="phone" value="+98 902 200 88 09" /></div>
+      <div class="form-group full">
+        <label><span class="rtl-only">لینک رزومه (PDF)</span><span class="ltr-only">Resume Link (PDF)</span></label>
+        <input id="resumeUrl" value="/resume.pdf" />
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Skills -->
+  <div class="card step-panel hidden" data-step="2">
+    <h2><span class="rtl-only">🧠 مهارت‌ها</span><span class="ltr-only">🧠 Skills</span></h2>
+    <p class="desc"><span class="rtl-only">مهارت‌های خود را با درصد وارد کنید (دسته‌بندی اختیاری)</span><span class="ltr-only">Add your skills with percentages (categories optional)</span></p>
+    <div id="skillsContainer" class="entries">
+      <!-- default entries filled by JS -->
+    </div>
+    <button class="btn btn-add" onclick="addSkill()"><i class="uil uil-plus"></i> <span class="rtl-only">افزودن مهارت</span><span class="ltr-only">Add Skill</span></button>
+  </div>
+
+  <!-- STEP 3: Projects -->
+  <div class="card step-panel hidden" data-step="3">
+    <h2><span class="rtl-only">🚀 پروژه‌ها</span><span class="ltr-only">🚀 Projects</span></h2>
+    <p class="desc"><span class="rtl-only">پروژه‌های خود را اضافه کنید (نام، توضیح، تکنولوژی‌ها، لینک گیت‌هاب)</span><span class="ltr-only">Add your projects (name, description, tech, GitHub link)</span></p>
+    <div id="projectsContainer" class="entries">
+      <!-- filled by JS -->
+    </div>
+    <button class="btn btn-add" onclick="addProject()"><i class="uil uil-plus"></i> <span class="rtl-only">افزودن پروژه</span><span class="ltr-only">Add Project</span></button>
+  </div>
+
+  <!-- STEP 4: Certificates -->
+  <div class="card step-panel hidden" data-step="4">
+    <h2><span class="rtl-only">🎓 گواهینامه‌ها</span><span class="ltr-only">🎓 Certifications</span></h2>
+    <p class="desc"><span class="rtl-only">گواهینامه‌های خود را با نام، ناشر، تاریخ و لینک اضافه کنید</span><span class="ltr-only">Add your certificates (title, issuer, date, URL)</span></p>
+    <div id="certsContainer" class="entries">
+      <!-- filled by JS -->
+    </div>
+    <button class="btn btn-add" onclick="addCert()"><i class="uil uil-plus"></i> <span class="rtl-only">افزودن گواهینامه</span><span class="ltr-only">Add Certificate</span></button>
+  </div>
+
+  <!-- STEP 5: Output -->
+  <div class="card step-panel hidden" data-step="5">
+    <h2><span class="rtl-only">📦 خروجی</span><span class="ltr-only">📦 Output</span></h2>
+    <p class="desc"><span class="rtl-only">فایل config.js خود را دانلود کنید، سپس طبق راهنما عمل کنید</span><span class="ltr-only">Download your config.js file and follow the guide</span></p>
+
+    <h3 style="font-size:1rem;margin-bottom:.5rem;color:var(--second)">
+      <span class="rtl-only">۱. دانلود فایل تنظیمات</span>
+      <span class="ltr-only">1. Download Config</span>
+    </h3>
+    <pre id="outputCode">// Your config.js will appear here</pre>
+    <div class="output-actions">
+      <button class="btn btn-primary" onclick="downloadConfig()"><i class="uil uil-download-alt"></i> <span class="rtl-only">دانلود config.js</span><span class="ltr-only">Download config.js</span></button>
+      <button class="btn btn-secondary" onclick="copyConfig()"><i class="uil uil-copy"></i> <span class="rtl-only">کپی</span><span class="ltr-only">Copy</span></button>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem;color:var(--second)">
+      <span class="rtl-only">۲. راهنمای استفاده</span>
+      <span class="ltr-only">2. How to Use</span>
+    </h3>
+    <div style="background:#f8faff;border:1px solid #e8ecf5;border-radius:8px;padding:1.2rem;font-size:.85rem;line-height:1.8">
+      <ol style="padding-inline-start:1.2rem">
+        <li class="rtl-only"><a href="https://github.com/Arefmtl/portfolio-template" target="_blank">تمپلیت را از گیت‌هاب دانلود کنید</a></li>
+        <li class="ltr-only"><a href="https://github.com/Arefmtl/portfolio-template" target="_blank">Download the template from GitHub</a></li>
+        <li class="rtl-only">فایل <code>config.js</code> دانلود شده را جایگزین <code>assets/js/config.js</code> در تمپلیت کنید</li>
+        <li class="ltr-only">Replace <code>assets/js/config.js</code> in the template with your downloaded file</li>
+        <li class="rtl-only">عکس پروفایل خود را در <code>assets/img/profile.jpg</code> قرار دهید</li>
+        <li class="ltr-only">Put your photo in <code>assets/img/profile.jpg</code></li>
+        <li class="rtl-only">عکس گواهینامه‌ها را در <code>assets/img/certs/</code> قرار دهید</li>
+        <li class="ltr-only">Put certificate images in <code>assets/img/certs/</code></li>
+        <li class="rtl-only"><code>index.html</code> را در مرورگر باز کنید → پورتفولیوی شما آماده است!</li>
+        <li class="ltr-only">Open <code>index.html</code> in a browser → your portfolio is ready!</li>
+      </ol>
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.5rem 0 .5rem;color:var(--second)">
+      <span class="rtl-only">۳. انتشار در گیت‌هاب پیج</span>
+      <span class="ltr-only">3. Deploy to GitHub Pages</span>
+    </h3>
+    <div style="background:#1a1a2e;color:#aaccd6;padding:1rem;border-radius:8px;font-family:var(--mono);font-size:.75rem;overflow-x:auto">
+# Create a repo named username.github.io
+git init
+git add -A
+git commit -m "my portfolio"
+git branch -M main
+git remote add origin https://github.com/username/username.github.io.git
+git push -u origin main
+# → Your site is live at https://username.github.io
+    </div>
+
+    <p style="margin-top:1rem;color:var(--muted);font-size:.8rem;text-align:center">
+      <i class="uil uil-heart" style="color:#e44"></i>
+      <span class="rtl-only">ساخته شده با ❤️ توسط علی کاظمی</span>
+      <span class="ltr-only">Made with ❤️ by Ali Kazemi</span>
+    </p>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-btns">
+    <button class="btn btn-secondary" id="prevBtn" onclick="prevStep()"><i class="uil uil-arrow-right"></i> <span class="rtl-only">قبلی</span><span class="ltr-only">Previous</span></button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextStep()"><span class="rtl-only">بعدی</span><span class="ltr-only">Next</span> <i class="uil uil-arrow-left"></i></button>
+  </div>
+
+  <!-- Footer -->
+  <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:var(--muted)">
+    <a href="https://arefmtl.github.io" style="color:var(--first)">← <span class="rtl-only">بازگشت به پورتفولیو</span><span class="ltr-only">Back to portfolio</span></a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/Arefmtl/portfolio-template" style="color:var(--first)">GitHub</a>
+  </p>
+</div>
+
+<script>
+/* ── MULTI-STEP NAV ────────────────────────────────────── */
+let currentStep = 1;
+const totalSteps = 5;
+
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach(el => el.classList.add('hidden'));
+  document.querySelector(`.step-panel[data-step="${n}"]`).classList.remove('hidden');
+  document.querySelectorAll('.step').forEach(el => {
+    el.classList.remove('active');
+    if (parseInt(el.dataset.step) === n) el.classList.add('active');
+  });
+  document.getElementById('prevBtn').style.visibility = n === 1 ? 'hidden' : 'visible';
+  document.getElementById('nextBtn').innerHTML = n === totalSteps
+    ? '<span class="rtl-only">اتمام 🎉</span><span class="ltr-only">Finish 🎉</span>'
+    : '<span class="rtl-only">بعدی</span><span class="ltr-only">Next</span> <i class="uil uil-arrow-left"></i>';
+}
+
+function nextStep() {
+  if (currentStep === totalSteps) return;
+  // Mark current as done
+  document.querySelector(`.step[data-step="${currentStep}"]`)?.classList.add('done');
+  currentStep++;
+  showStep(currentStep);
+  if (currentStep === totalSteps) generateOutput();
+}
+
+function prevStep() {
+  if (currentStep <= 1) return;
+  currentStep--;
+  showStep(currentStep);
+}
+
+/* ── TOGGLE LANG ────────────────────────────────────────── */
+let currentLang = 'fa';
+function toggleLang() {
+  currentLang = currentLang === 'fa' ? 'en' : 'fa';
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+  document.getElementById('langToggle').textContent = currentLang === 'fa' ? '🇬🇧 EN' : '🇮🇷 FA';
+}
+
+/* ── SKILLS ─────────────────────────────────────────────── */
+let skillId = 0;
+const defaultSkills = [
+  { name: 'Python', pct: 90, cat: 'Programming' },
+  { name: 'Machine Learning', pct: 85, cat: 'Programming' },
+  { name: 'SQL', pct: 60, cat: 'Programming' },
+];
+
+function renderSkills() {
+  const container = document.getElementById('skillsContainer');
+  const items = container.querySelectorAll('.entry');
+  const data = [];
+  items.forEach(el => {
+    data.push({
+      name: el.querySelector('.sk-name')?.value || '',
+      pct: parseInt(el.querySelector('.sk-pct')?.value) || 0,
+      cat: el.querySelector('.sk-cat')?.value || 'Programming',
+    });
+  });
+  container.innerHTML = data.map((s, i) => `
+    <div class="entry">
+      <div class="entry-grid">
+        <div class="form-group"><label><span class="rtl-only">نام مهارت</span><span class="ltr-only">Skill Name</span></label><input class="sk-name" value="${s.name}" /></div>
+        <div class="form-group"><label>%</label><input type="number" class="sk-pct" min="0" max="100" value="${s.pct}" /></div>
+        <div class="form-group"><label><span class="rtl-only">دسته‌بندی</span><span class="ltr-only">Category</span></label><input class="sk-cat" value="${s.cat}" /></div>
+      </div>
+      <button class="entry-remove" onclick="this.closest('.entry').remove()"><i class="uil uil-trash-alt"></i> <span class="rtl-only">حذف</span><span class="ltr-only">Remove</span></button>
+    </div>
+  `).join('');
+}
+function addSkill() {
+  const container = document.getElementById('skillsContainer');
+  container.insertAdjacentHTML('beforeend', `
+    <div class="entry">
+      <div class="entry-grid">
+        <div class="form-group"><label><span class="rtl-only">نام مهارت</span><span class="ltr-only">Skill Name</span></label><input class="sk-name" value="" /></div>
+        <div class="form-group"><label>%</label><input type="number" class="sk-pct" min="0" max="100" value="70" /></div>
+        <div class="form-group"><label><span class="rtl-only">دسته‌بندی</span><span class="ltr-only">Category</span></label><input class="sk-cat" value="Programming" /></div>
+      </div>
+      <button class="entry-remove" onclick="this.closest('.entry').remove()"><i class="uil uil-trash-alt"></i> <span class="rtl-only">حذف</span><span class="ltr-only">Remove</span></button>
+    </div>
+  `);
+}
+
+/* ── PROJECTS ───────────────────────────────────────────── */
+const defaultProjects = [
+  { title_fa: 'TOOL-BOX: پایپ‌لاین ML', title_en: 'TOOL-BOX: ML Pipeline', desc_fa: 'پایپ‌لاین کامل ML', desc_en: 'End-to-end ML pipeline', tech: 'Python, Flask, Tailwind', github: 'https://github.com/Arefmtl/TOOL-BOX' },
+  { title_fa: 'تشخیص آلزایمر با fMRI', title_en: 'Alzheimer\'s Diagnosis', desc_fa: 'شبکه‌های هایپرگراف', desc_en: 'Hypergraph neural networks', tech: 'PyTorch, Nilearn', github: 'https://github.com/Arefmtl/ADNI-Alzheimer-diagnosis' },
+  { title_fa: 'پیش‌بینی قیمت مسکن', title_en: 'Housing Price Prediction', desc_fa: 'مدل رگرسیون', desc_en: 'Regression model', tech: 'Python, Scikit-learn', github: 'https://github.com/Arefmtl/Housing-Price-Prediction' },
+];
+
+function renderProjects() {
+  const container = document.getElementById('projectsContainer');
+  const items = container.querySelectorAll('.entry');
+  const data = [];
+  items.forEach(el => {
+    data.push({
+      title_fa: el.querySelector('.pj-fa')?.value || '',
+      title_en: el.querySelector('.pj-en')?.value || '',
+      desc_fa: el.querySelector('.pj-desc-fa')?.value || '',
+      desc_en: el.querySelector('.pj-desc-en')?.value || '',
+      tech: el.querySelector('.pj-tech')?.value || '',
+      github: el.querySelector('.pj-gh')?.value || '',
+    });
+  });
+  container.innerHTML = data.map(p => `
+    <div class="entry">
+      <div class="entry-grid">
+        <div class="form-group"><label><span class="rtl-only">نام (فارسی)</span><span class="ltr-only">Title (Persian)</span></label><input class="pj-fa" value="${p.title_fa}" /></div>
+        <div class="form-group"><label><span class="rtl-only">نام (انگلیسی)</span><span class="ltr-only">Title (English)</span></label><input class="pj-en" value="${p.title_en}" /></div>
+        <div class="form-group full"><label><span class="rtl-only">توضیح (فارسی)</span><span class="ltr-only">Desc (Persian)</span></label><textarea class="pj-desc-fa" rows="1">${p.desc_fa}</textarea></div>
+        <div class="form-group full"><label><span class="rtl-only">توضیح (انگلیسی)</span><span class="ltr-only">Desc (English)</span></label><textarea class="pj-desc-en" rows="1">${p.desc_en}</textarea></div>
+        <div class="form-group"><label><span class="rtl-only">تکنولوژی‌ها</span><span class="ltr-only">Tech Stack</span></label><input class="pj-tech" value="${p.tech}" /></div>
+        <div class="form-group"><label>GitHub</label><input class="pj-gh" value="${p.github}" /></div>
+      </div>
+      <button class="entry-remove" onclick="this.closest('.entry').remove()"><i class="uil uil-trash-alt"></i> <span class="rtl-only">حذف</span><span class="ltr-only">Remove</span></button>
+    </div>
+  `).join('');
+}
+function addProject() {
+  const container = document.getElementById('projectsContainer');
+  container.insertAdjacentHTML('beforeend', `
+    <div class="entry">
+      <div class="entry-grid">
+        <div class="form-group"><label><span class="rtl-only">نام (فارسی)</span><span class="ltr-only">Title (Persian)</span></label><input class="pj-fa" value="" /></div>
+        <div class="form-group"><label><span class="rtl-only">نام (انگلیسی)</span><span class="ltr-only">Title (English)</span></label><input class="pj-en" value="" /></div>
+        <div class="form-group full"><label><span class="rtl-only">توضیح (فارسی)</span><span class="ltr-only">Desc (Persian)</span></label><textarea class="pj-desc-fa" rows="1"></textarea></div>
+        <div class="form-group full"><label><span class="rtl-only">توضیح (انگلیسی)</span><span class="ltr-only">Desc (English)</span></label><textarea class="pj-desc-en" rows="1"></textarea></div>
+        <div class="form-group"><label><span class="rtl-only">تکنولوژی‌ها</span><span class="ltr-only">Tech Stack</span></label><input class="pj-tech" value="" /></div>
+        <div class="form-group"><label>GitHub</label><input class="pj-gh" value="" /></div>
+      </div>
+      <button class="entry-remove" onclick="this.closest('.entry').remove()"><i class="uil uil-trash-alt"></i> <span class="rtl-only">حذف</span><span class="ltr-only">Remove</span></button>
+    </div>
+  `);
+}
+
+/* ── CERTIFICATES ───────────────────────────────────────── */
+const defaultCerts = [
+  { title: 'Generative AI Career Essentials', subtitle: 'Microsoft & LinkedIn — Jan 2025', url: '#' },
+  { title: 'Machine Learning', subtitle: 'Stanford (Coursera) — Mar 2024', url: '#' },
+  { title: 'Data Science in Stratified Healthcare', subtitle: 'U. Edinburgh — Mar 2024', url: '#' },
+  { title: 'Machine Learning', subtitle: 'Sololearn — Apr 2024', url: '#' },
+];
+
+function renderCerts() {
+  const container = document.getElementById('certsContainer');
+  const items = container.querySelectorAll('.entry');
+  const data = [];
+  items.forEach(el => {
+    data.push({
+      title: el.querySelector('.cert-title')?.value || '',
+      subtitle: el.querySelector('.cert-sub')?.value || '',
+      url: el.querySelector('.cert-url')?.value || '#',
+    });
+  });
+  container.innerHTML = data.map(c => `
+    <div class="entry">
+      <div class="entry-grid">
+        <div class="form-group full"><label><span class="rtl-only">نام گواهینامه</span><span class="ltr-only">Certificate Name</span></label><input class="cert-title" value="${c.title}" /></div>
+        <div class="form-group"><label><span class="rtl-only">ناشر و تاریخ</span><span class="ltr-only">Issuer & Date</span></label><input class="cert-sub" value="${c.subtitle}" /></div>
+        <div class="form-group"><label>URL</label><input class="cert-url" value="${c.url}" /></div>
+      </div>
+      <button class="entry-remove" onclick="this.closest('.entry').remove()"><i class="uil uil-trash-alt"></i> <span class="rtl-only">حذف</span><span class="ltr-only">Remove</span></button>
+    </div>
+  `).join('');
+}
+function addCert() {
+  const container = document.getElementById('certsContainer');
+  container.insertAdjacentHTML('beforeend', `
+    <div class="entry">
+      <div class="entry-grid">
+        <div class="form-group full"><label><span class="rtl-only">نام گواهینامه</span><span class="ltr-only">Certificate Name</span></label><input class="cert-title" value="" /></div>
+        <div class="form-group"><label><span class="rtl-only">ناشر و تاریخ</span><span class="ltr-only">Issuer & Date</span></label><input class="cert-sub" value="" /></div>
+        <div class="form-group"><label>URL</label><input class="cert-url" value="#" /></div>
+      </div>
+      <button class="entry-remove" onclick="this.closest('.entry').remove()"><i class="uil uil-trash-alt"></i> <span class="rtl-only">حذف</span><span class="ltr-only">Remove</span></button>
+    </div>
+  `);
+}
+
+/* ── COLLECT DATA ───────────────────────────────────────── */
+function collectData() {
+  const skills = [];
+  document.querySelectorAll('#skillsContainer .entry').forEach(el => {
+    skills.push({
+      name: el.querySelector('.sk-name')?.value || '',
+      pct: parseInt(el.querySelector('.sk-pct')?.value) || 0,
+      cat: el.querySelector('.sk-cat')?.value || 'General',
+    });
+  });
+
+  const projects = [];
+  document.querySelectorAll('#projectsContainer .entry').forEach(el => {
+    projects.push({
+      title_fa: el.querySelector('.pj-fa')?.value || '',
+      title_en: el.querySelector('.pj-en')?.value || '',
+      desc_fa: el.querySelector('.pj-desc-fa')?.value || '',
+      desc_en: el.querySelector('.pj-desc-en')?.value || '',
+      tech: el.querySelector('.pj-tech')?.value || '',
+      github: el.querySelector('.pj-gh')?.value || '',
+    });
+  });
+
+  const certs = [];
+  document.querySelectorAll('#certsContainer .entry').forEach(el => {
+    certs.push({
+      title: el.querySelector('.cert-title')?.value || '',
+      subtitle: el.querySelector('.cert-sub')?.value || '',
+      url: el.querySelector('.cert-url')?.value || '#',
+    });
+  });
+
+  return {
+    personal: {
+      fa_name: document.getElementById('fa_name')?.value || '',
+      en_name: document.getElementById('en_name')?.value || '',
+      fa_title: document.getElementById('fa_title')?.value || '',
+      en_title: document.getElementById('en_title')?.value || '',
+      fa_bio: document.getElementById('fa_bio')?.value || '',
+      en_bio: document.getElementById('en_bio')?.value || '',
+      fa_loc: document.getElementById('fa_loc')?.value || '',
+      en_loc: document.getElementById('en_loc')?.value || '',
+      linkedin: document.getElementById('linkedin')?.value || '',
+      github: document.getElementById('github')?.value || '',
+      email: document.getElementById('email')?.value || '',
+      phone: document.getElementById('phone')?.value || '',
+      resumeUrl: document.getElementById('resumeUrl')?.value || '/resume.pdf',
+    },
+    skills,
+    projects,
+    certs,
+  };
+}
+
+/* ── GENERATE OUTPUT ────────────────────────────────────── */
+function generateOutput() {
+  const d = collectData();
+  const cfg = `// ===========================================================
+// 🧩 PORTFOLIO CONFIG — Generated by Portfolio Builder
+// Edit this file and replace assets/js/config.js in the template
+// ===========================================================
+
+const CONFIG = {
+  lang: 'both',
+
+  name: { fa: '${d.personal.fa_name}', en: '${d.personal.en_name}' },
+  title: { fa: '${d.personal.fa_title}', en: '${d.personal.en_title}' },
+  bio: { fa: '${d.personal.fa_bio}', en: '${d.personal.en_bio}' },
+  resumeUrl: '${d.personal.resumeUrl}',
+
+  profileImg: 'assets/img/profile.jpg',
+
+  social: [
+    { icon: 'uil-linkedin-alt', url: '${d.personal.linkedin}' },
+    { icon: 'uil-github-alt', url: '${d.personal.github}' },
+  ],
+
+  skills: [
+    {
+      icon: 'uil-brackets-curly',
+      title_fa: 'مهارت‌ها',
+      title_en: 'Skills',
+      subtitle_fa: 'تخصص‌ها',
+      subtitle_en: 'Expertise',
+      items: ${JSON.stringify(d.skills.map(s => ({ name: s.name, pct: s.pct })), null, 2)},
+    },
+  ],
+
+  education: [
+    {
+      title_fa: 'تحصیلات',
+      title_en: 'Education',
+      subtitle_fa: 'دانشگاه',
+      subtitle_en: 'University',
+      date: '',
+    },
+  ],
+
+  experience: [],
+
+  projects: ${JSON.stringify(d.projects.map(p => ({
+    title_fa: p.title_fa,
+    title_en: p.title_en,
+    desc_fa: p.desc_fa,
+    desc_en: p.desc_en,
+    tech: p.tech,
+    github: p.github,
+    demo: null,
+  })), null, 2)},
+
+  certificates: ${JSON.stringify(d.certs.map(c => ({
+    title: c.title,
+    subtitle: c.subtitle,
+    img: 'assets/img/certs/placeholder.svg',
+    url: c.url,
+  })), null, 2)},
+
+  contact: {
+    phone: '${d.personal.phone}',
+    email: '${d.personal.email}',
+    location_fa: '${d.personal.fa_loc}',
+    location_en: '${d.personal.en_loc}',
+  },
+};`;
+
+  document.getElementById('outputCode').textContent = cfg;
+}
+
+/* ── DOWNLOAD ───────────────────────────────────────────── */
+function downloadConfig() {
+  const code = document.getElementById('outputCode').textContent;
+  const blob = new Blob([code], { type: 'text/javascript' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'config.js';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function copyConfig() {
+  const code = document.getElementById('outputCode').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.output-actions .btn-secondary');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ <span class="rtl-only">کپی شد!</span><span class="ltr-only">Copied!</span>';
+    setTimeout(() => btn.innerHTML = orig, 2000);
+  });
+}
+
+/* ── INIT ───────────────────────────────────────────────── */
+renderSkills();
+renderProjects();
+renderCerts();
+showStep(1);
+</script>
+</body>
+</html>
