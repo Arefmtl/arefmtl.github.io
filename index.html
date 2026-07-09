@@ -117,7 +117,7 @@ img{max-width:100%;height:auto}
 .qualification__calendar{font-size:.75rem;color:var(--text-light)}
 .qualification__rounder{display:inline-block;width:13px;height:13px;background:var(--first);border-radius:50%}
 .qualification__line{display:block;width:1px;height:100%;background:var(--first);transform:translate(6px,-7px)}
-.portfolio__container{overflow:initial}
+.portfolio__container{overflow:hidden}
 .portfolio__content{padding:0 1.5rem}
 .portfolio__img{width:265px;border-radius:.5rem;justify-self:center}
 .portfolio__title{font-size:var(--fs-h3);margin-bottom:.5rem}
@@ -475,7 +475,7 @@ document.querySelectorAll('[data-target]').forEach(t=>t.addEventListener('click'
 }));
 
 // ── Swiper ──
-new Swiper('.swiper',{cssMode:true,loop:true,mousewheel:true,pagination:{el:'.swiper-pagination',clickable:true}});
+new Swiper('.swiper',{loop:true,mousewheel:{forceToAxis:true,sensitivity:1},pagination:{el:'.swiper-pagination',clickable:true},keyboard:{enabled:true}});
 
 // ── Scrollspy + effects ──
 const sc=document.querySelectorAll('section[id]');
