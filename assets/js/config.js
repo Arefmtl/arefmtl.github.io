@@ -25,7 +25,7 @@ const CONFIG = {
   },
   about: {
     fa: 'فارغ‌التحصیل مهندسی پزشکی حیات (BME) با علاقه عمیق به علم داده، یادگیری ماشین و توسعه نرم‌افزار. روی پروژه‌های متنوعی کار کرده‌ام: پیش‌بینی قیمت مسکن، تحلیل نرخ ضربان قلب، پایپ‌لاین کامل ML، شبکه‌های عصبی هایپرگراف برای تشخیص آلزایمر، و تحلیل آمادگی ایالت‌ها برای خودروهای خودران.',
-    en: 'Biomedical Engineering (BME) graduate passionate about data science, machine learning, and software development. Worked on housing price prediction, heart rate analysis, full ML pipelines, hypergraph neural networks for Alzheimer\'s diagnosis, and autonomous vehicle readiness analysis.'
+    en: "Biomedical Engineering (BME) graduate passionate about data science, machine learning, and software development. Worked on housing price prediction, heart rate analysis, full ML pipelines, hypergraph neural networks for Alzheimer's diagnosis, and autonomous vehicle readiness analysis."
   },
   resumeUrl: '/resume.pdf',  // Link to download CV
 
@@ -146,7 +146,7 @@ const CONFIG = {
     },
     {
       title_fa: 'تشخیص آلزایمر با fMRI',
-      title_en: 'Alzheimer\'s Diagnosis via fMRI',
+      title_en: "Alzheimer's Diagnosis via fMRI",
       desc_fa: 'پایپ‌لاین یادگیری عمیق: DICOM→NIfTI → استخراج ویژگی از ۴۸ ناحیه مغزی → ساخت گراف → VHGAE → GAN → HGNN برای تشخیص AD vs CN vs MCI.',
       desc_en: 'Deep learning pipeline: DICOM→NIfTI → ROI extraction (48 regions) → graphs → VHGAE → GAN → HGNN classification (AD vs CN vs MCI).',
       tech: 'PyTorch, Nilearn, NiBabel',
