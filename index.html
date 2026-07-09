@@ -1,378 +1,94 @@
 <!DOCTYPE html>
+<!-- =============================================================
+  🎨 PORTFOLIO TEMPLATE — by Ali Kazemi (based on Kunj Mehta)
+  =============================================================
+  HOW TO USE:
+  1. Edit assets/js/config.js  →  fill YOUR info
+  2. Replace profile photo      →  assets/img/profile.jpg
+  3. Add cert images            →  assets/img/certs/*.png
+  4. Open index.html in browser →  done!
+  ============================================================= -->
 <html lang="fa" dir="rtl" data-lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#112E81">
-  <meta name="description" content="Ali Kazemi - Data Scientist & ML Engineer Portfolio">
-  <title>Ali Kazemi | Data Scientist & ML Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <style>
-    :root {
-      --header-height: 3.5rem;
-      --hue-color: 224;
-      --first-color: hsl(var(--hue-color), 77%, 29%);
-      --first-color-second: hsl(var(--hue-color), 77%, 29%);
-      --first-color-alt: hsl(var(--hue-color), 58%, 25%);
-      --first-color-lighter: hsl(212, 67%, 85%);
-      --title-color: hsl(var(--hue-color), 8%, 15%);
-      --text-color: hsl(var(--hue-color), 8%, 45%);
-      --text-color-light: hsl(var(--hue-color), 8%, 65%);
-      --input-color: hsl(var(--hue-color), 70%, 96%);
-      --body-color: hsl(var(--hue-color), 60%, 98%);
-      --container-color: #FFF;
-      --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
-      --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
-      --body-font: 'Poppins', system-ui, sans-serif;
-      --big-font-size: 2rem;
-      --h1-font-size: 1.5rem;
-      --h2-font-size: 1.25rem;
-      --h3-font-size: 1.125rem;
-      --normal-font-size: .938rem;
-      --small-font-size: .813rem;
-      --smaller-font-size: .75rem;
-      --font-medium: 500;
-      --font-semi-bold: 600;
-      --mb-0-25: .25rem;
-      --mb-0-5: .5rem;
-      --mb-0-75: .75rem;
-      --mb-1: 1rem;
-      --mb-1-5: 1.5rem;
-      --mb-2: 2rem;
-      --mb-2-5: 2.5rem;
-      --mb-3: 3rem;
-      --z-tooltip: 10;
-      --z-fixed: 100;
-      --z-modal: 1000;
-    }
-    @media screen and (min-width: 968px) {
-      :root {
-        --big-font-size: 3rem;
-        --h1-font-size: 2.25rem;
-        --h2-font-size: 1.5rem;
-        --h3-font-size: 1.25rem;
-        --normal-font-size: 1rem;
-        --small-font-size: .875rem;
-        --smaller-font-size: .813rem;
-      }
-    }
-    body.dark {
-      --first-color-second: hsl(var(--hue-color), 30%, 8%);
-      --title-color: hsl(var(--hue-color), 8%, 95%);
-      --text-color: hsl(var(--hue-color), 8%, 75%);
-      --input-color: hsl(var(--hue-color), 29%, 16%);
-      --body-color: hsl(222, 25%, 10%);
-      --container-color: hsl(224, 28%, 14%);
-      --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
-      --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
-    }
-    * { box-sizing: border-box; padding: 0; margin: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0 0 var(--header-height) 0;
-      font-family: var(--body-font);
-      font-size: var(--normal-font-size);
-      background-color: var(--body-color);
-      color: var(--text-color);
-      transition: .3s;
-    }
-    h1,h2,h3,h4 { color: var(--title-color); font-weight: var(--font-semi-bold); }
-    ul { list-style: none; }
-    a { text-decoration: none; }
-    img { max-width: 100%; height: auto; }
-    .section { padding: 2rem 0 4rem; }
-    .section__title { font-size: var(--h1-font-size); }
-    .section__subtitle { display: block; font-size: var(--small-font-size); margin-bottom: var(--mb-3); }
-    .section__title, .section__subtitle { text-align: center; }
-    .container { max-width: 768px; margin-left: var(--mb-1-5); margin-right: var(--mb-1-5); }
-    .grid { display: grid; gap: 1.5rem; }
-    .header {
-      width: 100%; position: fixed; bottom: 0; left: 0; z-index: var(--z-fixed);
-      background-color: var(--body-color); transition: .3s;
-    }
-    .nav {
-      max-width: 968px; height: var(--header-height);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .nav__logo, .nav__toggle { color: var(--title-color); font-weight: var(--font-medium); }
-    .nav__logo:hover { color: var(--first-color); }
-    .nav__toggle { font-size: 1.1rem; cursor: pointer; }
-    .nav__toggle:hover { color: var(--first-color); }
-    @media screen and (max-width: 767px) {
-      .nav__menu {
-        position: fixed; bottom: -100%; left: 0; width: 100%;
-        background-color: var(--body-color); padding: 2rem 1.5rem 4rem;
-        box-shadow: 0 -1px 4px rgba(0,0,0,.15); border-radius: 1.5rem 1.5rem 0 0;
-        transition: .3s;
-      }
-    }
-    .nav__list { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .nav__link {
-      display: flex; flex-direction: column; align-items: center;
-      font-size: var(--small-font-size); color: var(--title-color);
-      font-weight: var(--font-medium);
-    }
-    .nav__link:hover { color: var(--first-color); }
-    .nav__icon { font-size: 1.2rem; }
-    .nav__close {
-      position: absolute; right: 1.3rem; bottom: .5rem;
-      font-size: 1.5rem; cursor: pointer; color: var(--first-color);
-    }
-    .nav__close:hover { color: var(--first-color-alt); }
-    .show-menu { bottom: 0; }
-    .active-link { color: var(--first-color); }
-    .scroll-header { box-shadow: 0 -1px 4px rgba(0,0,0,.15); }
-    .nav__btns { display: flex; align-items: center; }
-    .change-theme {
-      font-size: 1.25rem; color: var(--title-color);
-      margin-right: var(--mb-1); cursor: pointer;
-    }
-    .change-theme:hover { color: var(--first-color); }
-    .lang-toggle {
-      font-size: .8rem; color: var(--title-color); cursor: pointer;
-      background: var(--input-color); border: 1px solid var(--first-color-lighter);
-      border-radius: 20px; padding: 2px 10px; font-weight: 600;
-      transition: .2s; margin-left: .5rem;
-    }
-    .lang-toggle:hover { background: var(--first-color-lighter); }
-    .home__container { gap: 1rem; }
-    .home__content { grid-template-columns: .5fr 3fr; padding-top: 3.5rem; align-items: center; }
-    .home__social { display: grid; grid-template-columns: max-content; row-gap: 1rem; }
-    .home__social-icon { font-size: 1.25rem; color: var(--first-color); }
-    .home__social-icon:hover { color: var(--first-color-alt); }
-    .home__blob { width: 200px; fill: var(--first-color); }
-    .home__blob-img { width: 170px; }
-    .home__data { grid-column: 1/3; }
-    .home__title { font-size: var(--big-font-size); }
-    .home__subtitle { font-size: var(--h3-font-size); color: var(--text-color); font-weight: var(--font-medium); margin-bottom: var(--mb-0-75); }
-    .home__description { margin-bottom: var(--mb-2); }
-    .home__scroll { display: none; }
-    .home__scroll-button { color: var(--first-color); transition: .3s; }
-    .home__scroll-button:hover { transform: translateY(.25rem); }
-    .home__scroll-mouse { font-size: 2rem; }
-    .home__scroll-name { font-size: var(--small-font-size); color: var(--title-color); font-weight: var(--font-medium); margin-right: var(--mb-0-25); }
-    .home__scroll-arrow { font-size: 1.25rem; }
-    .button {
-      display: inline-block; background-color: var(--first-color);
-      color: #FFF; padding: 1rem; border-radius: .5rem;
-      font-weight: var(--font-medium);
-    }
-    .button:hover { background-color: var(--first-color-alt); }
-    .button__icon { font-size: 1.25rem; margin-left: var(--mb-0-5); transition: .3s; }
-    .button--flex { display: inline-flex; align-items: center; }
-    .button--small { padding: .75rem 1rem; }
-    .button--link { padding: 0; background-color: transparent; color: var(--first-color); }
-    .button--link:hover { background-color: transparent; color: var(--first-color-alt); }
-    .button--white {
-      background-color: #FFF; color: var(--first-color);
-    }
-    .button--white:hover { background-color: #f0f0f0; }
-    .about__img { width: 200px; border-radius: .5rem; justify-self: center; align-self: center; }
-    .about__description { text-align: center; margin-bottom: var(--mb-2-5); }
-    .about__info { display: flex; justify-content: space-evenly; margin-bottom: var(--mb-2-5); }
-    .about__info-title { font-size: var(--h2-font-size); font-weight: var(--font-semi-bold); color: var(--title-color); }
-    .about__info-name { font-size: var(--smaller-font-size); }
-    .about__info-title, .about__info-name { display: block; text-align: center; }
-    .about__buttons { display: flex; justify-content: center; }
-    .skills__container { row-gap: 0; }
-    .skills__header { display: flex; align-items: center; margin-bottom: var(--mb-2-5); cursor: pointer; }
-    .skills__icon, .skills__arrow { font-size: 2rem; color: var(--first-color); }
-    .skills__icon { margin-right: var(--mb-0-75); }
-    .skills__title { font-size: var(--h3-font-size); }
-    .skills__subtitle { font-size: var(--small-font-size); color: var(--text-color-light); }
-    .skills__arrow { margin-left: auto; transition: .4s; }
-    .skills__list { row-gap: 1.5rem; }
-    .skills__titles { display: flex; justify-content: space-between; margin-bottom: var(--mb-0-5); }
-    .skills__name { font-size: var(--normal-font-size); font-weight: var(--font-medium); }
-    .skills__bar, .skills__percentage { height: 5px; border-radius: .25rem; }
-    .skills__bar { background-color: var(--first-color-lighter); }
-    .skills__percentage { display: block; background-color: var(--first-color); }
-    .skills__close .skills__list { height: 0; overflow: hidden; }
-    .skills__open .skills__list { height: max-content; margin-bottom: var(--mb-2-5); }
-    .skills__open .skills__arrow { transform: rotate(-180deg); }
-    .qualification__tabs { display: flex; justify-content: center; margin-bottom: var(--mb-2); }
-    .qualification__button {
-      font-size: var(--h3-font-size); font-weight: var(--font-medium);
-      color: var(--text-color); margin: 0 var(--mb-1); cursor: pointer;
-    }
-    .qualification__button:hover { color: var(--first-color); }
-    .qualification__icon { font-size: 1.8rem; margin-right: var(--mb-0-25); }
-    .qualification__active { color: var(--first-color); }
-    .qualification__sections { display: grid; grid-template-columns: 1fr; }
-    .qualification__content[data-content] { display: none; }
-    .qualification__active[data-content] { display: block; }
-    .qualification__data { display: grid; grid-template-columns: 1fr max-content 1fr; column-gap: 1.5rem; }
-    .qualification__title { font-size: var(--normal-font-size); font-weight: var(--font-medium); }
-    .qualification__subtitle { display: inline-block; font-size: var(--small-font-size); margin-bottom: var(--mb-1); }
-    .qualification__calendar { font-size: var(--smaller-font-size); color: var(--text-color-light); }
-    .qualification__rounder { display: inline-block; width: 13px; height: 13px; background-color: var(--first-color); border-radius: 50%; }
-    .qualification__line { display: block; width: 1px; height: 100%; background-color: var(--first-color); transform: translate(6px, -7px); }
-    .portfolio__container { overflow: initial; }
-    .portfolio__content { padding: 0 1.5rem; }
-    .portfolio__img { width: 265px; border-radius: .5rem; justify-self: center; }
-    .portfolio__title { font-size: var(--h3-font-size); margin-bottom: var(--mb-0-5); }
-    .portfolio__description { margin-bottom: var(--mb-0-75); }
-    .portfolio__button:hover .button__icon { transform: translateX(.25rem); }
-    .swiper-button-prev::after, .swiper-button-next::after { content: ''; }
-    .swiper-portfolio-icon { font-size: 2rem; color: var(--first-color); }
-    .swiper-container-horizontal > .swiper-pagination-bullets { bottom: -2.5rem; }
-    .swiper-pagination-bullet-active { background-color: var(--first-color); }
-    .swiper-button-prev, .swiper-button-next, .swiper-pagination-bullet { outline: none; }
-    .certification__container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .certification__content { position: relative; background-color: var(--container-color); padding: 1.5rem; border-radius: .5rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.1); transition: .3s; }
-    .certification__content:hover { box-shadow: 0 4px 16px rgba(0,0,0,.15); }
-    .certification__img { width: 80px; height: 80px; object-fit: contain; margin: 0 auto var(--mb-0-75); border-radius: .5rem; }
-    .certification__title { font-size: var(--h3-font-size); margin-bottom: var(--mb-0-25); }
-    .certification__subtitle { display: block; font-size: var(--smaller-font-size); color: var(--text-color-light); margin-bottom: var(--mb-1); }
-    .contact__container { row-gap: 3rem; }
-    .contact__information { display: flex; margin-bottom: var(--mb-2); }
-    .contact__icon { font-size: 2rem; color: var(--first-color); margin-right: var(--mb-0-75); }
-    .contact__title { font-size: var(--h3-font-size); font-weight: var(--font-medium); }
-    .contact__subtitle { font-size: var(--small-font-size); color: var(--text-color-light); }
-    .contact__content { background-color: var(--input-color); border-radius: .5rem; padding: .75rem 1rem .25rem; }
-    .contact__label { font-size: var(--smaller-font-size); color: var(--title-color); }
-    .contact__input { width: 100%; background-color: var(--input-color); color: var(--text-color); font-family: var(--body-font); font-size: var(--normal-font-size); border: none; outline: none; padding: .25rem .5rem .5rem 0; }
-    .footer { padding-top: 2rem; }
-    .footer__container { row-gap: 1.5rem; }
-    .footer__bg { background-color: var(--first-color-second); padding: 2rem 0 3rem; }
-    .footer__title { font-size: var(--h1-font-size); margin-bottom: var(--mb-0-25); }
-    .footer__subtitle { font-size: var(--small-font-size); }
-    .footer__links { display: flex; flex-direction: column; row-gap: 1.5rem; }
-    .footer__link:hover { color: var(--first-color-lighter); }
-    .footer__social { font-size: 1.25rem; margin-right: var(--mb-1-5); }
-    .footer__social:hover { color: var(--first-color-lighter); }
-    .footer__title, .footer__subtitle, .footer__link, .footer__social { color: #FFF; }
-    .scrollup {
-      position: fixed; right: 1rem; bottom: -20%; background-color: var(--first-color);
-      opacity: .8; padding: 0 .3rem; border-radius: .4rem; z-index: var(--z-tooltip);
-      transition: .4s;
-    }
-    .scrollup:hover { background-color: var(--first-color-alt); }
-    .scrollup__icon { font-size: 1.5rem; color: #FFF; }
-    .show-scroll { bottom: 5rem; }
-    ::-webkit-scrollbar { width: .60rem; background-color: var(--scroll-bar-color); border-radius: .5rem; }
-    ::-webkit-scrollbar-thumb { background-color: var(--scroll-thumb-color); border-radius: .5rem; }
-    ::-webkit-scrollbar-thumb:hover { background-color: var(--text-color-light); }
-    @media screen and (min-width: 568px) {
-      .home__content { grid-template-columns: max-content 1fr 1fr; }
-      .home__data { grid-column: initial; }
-      .home__img { order: 1; justify-self: center; }
-      .about__container, .portfolio__content, .contact__container, .footer__container { grid-template-columns: repeat(2, 1fr); }
-      .qualification__sections { display: grid; grid-template-columns: .6fr; justify-content: center; }
-    }
-    @media screen and (min-width: 768px) {
-      .container { margin-left: auto; margin-right: auto; }
-      body { margin: 0; }
-      .section { padding: 6rem 0 2rem; }
-      .header { top: 0; bottom: initial; }
-      .header, .main, .footer__container { padding: 0 1rem; }
-      .nav { height: calc(var(--header-height) + 1.5rem); column-gap: 1rem; }
-      .nav__icon, .nav__close, .nav__toggle { display: none; }
-      .nav__list { display: flex; column-gap: 2rem; }
-      .nav__menu { margin-left: auto; }
-      .change-theme { margin: 0; }
-      .home__container { row-gap: 5rem; }
-      .home__content { padding-top: 5.5rem; column-gap: 2rem; }
-      .home__blob { width: 270px; }
-      .home__scroll { display: block; }
-      .home__scroll-button { margin-left: 3rem; }
-      .about__container { column-gap: 5rem; }
-      .about__img { width: 350px; }
-      .about__description { text-align: initial; }
-      .about__info { justify-content: space-between; }
-      .about__buttons { justify-content: initial; }
-      .qualification__tabs { justify-content: center; }
-      .qualification__button { margin: 0 var(--mb-1); }
-      .qualification__sections { grid-template-columns: .5fr; }
-      .portfolio__img { width: 320px; }
-      .portfolio__content { align-items: center; }
-      .footer__container { grid-template-columns: repeat(3, 1fr); }
-      .footer__bg { padding: 3rem 0 3.5rem; }
-      .footer__links { flex-direction: row; column-gap: 2rem; }
-      .footer__socials { justify-self: flex-end; }
-    }
-    @media screen and (min-width: 1024px) {
-      .header, .main, .footer__container { padding: 0; }
-      .home__blob { width: 320px; }
-      .home__social { font-size: 1.5rem; }
-      .portfolio__content { column-gap: 5rem; }
-      .swiper-portfolio-icon { font-size: 3.5rem; }
-      .swiper-button-prev { left: -3.5rem; }
-      .swiper-button-next { right: -3.5rem; }
-      .swiper-container-horizontal > .swiper-pagination-bullets { bottom: -4.5rem; }
-      .certification__container { grid-template-columns: repeat(4, 1fr); }
-      .contact__form { width: 460px; }
-      .contact__inputs { grid-template-columns: repeat(2, 1fr); }
-    }
-    [dir="ltr"] .nav__btns { flex-direction: row-reverse; }
-    [dir="ltr"] .skills__icon { margin-right: 0; margin-left: var(--mb-0-75); }
-    [dir="ltr"] .skills__arrow { margin-left: 0; margin-right: auto; }
-    [dir="ltr"] .contact__icon { margin-right: 0; margin-left: var(--mb-0-75); }
-    [dir="ltr"] .home__scroll-button { margin-left: 0; margin-right: 3rem; }
-    [dir="ltr"] .lang-toggle { margin-left: 0; margin-right: .5rem; }
-    [dir="ltr"] .button__icon { margin-left: 0; margin-right: var(--mb-0-5); }
-    .hidden { display: none !important; }
-    .ltr-text { display: none; }
-    .rtl-text { display: inline; }
-    [dir="ltr"] .ltr-text { display: inline; }
-    [dir="ltr"] .rtl-text { display: none; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#112E81" />
+  <meta name="description" content="Portfolio" />
+  <title>Portfolio</title>
+
+  <!-- Fonts: Poppins (body) + JetBrains Mono (optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons: Unicons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+  <!-- Swiper (carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
+  <!-- ============================================================
+       HEADER / NAV
+       ============================================================ -->
   <header class="header" id="header">
     <nav class="nav container">
-      <a href="#" class="nav__logo"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></a>
+      <a href="#" class="nav__logo">
+        <span class="rtl-text">نام</span>
+        <span class="ltr-text">Name</span>
+      </a>
       <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list grid">
-          <li class="nav__item"><a href="#home" class="nav__link active-link"><i class="uil uil-estate nav__icon"></i><span class="rtl-text">خانه</span><span class="ltr-text">Home</span></a></li>
-          <li class="nav__item"><a href="#about" class="nav__link"><i class="uil uil-user nav__icon"></i><span class="rtl-text">درباره</span><span class="ltr-text">About</span></a></li>
-          <li class="nav__item"><a href="#skills" class="nav__link"><i class="uil uil-file-alt nav__icon"></i><span class="rtl-text">مهارت‌ها</span><span class="ltr-text">Skills</span></a></li>
-          <li class="nav__item"><a href="#portfolio" class="nav__link"><i class="uil uil-scenery nav__icon"></i><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></a></li>
-          <li class="nav__item"><a href="#certification" class="nav__link"><i class="uil uil-newspaper nav__icon"></i><span class="rtl-text">گواهینامه‌ها</span><span class="ltr-text">Certifications</span></a></li>
-          <li class="nav__item"><a href="#contact" class="nav__link"><i class="uil uil-message nav__icon"></i><span class="rtl-text">تماس</span><span class="ltr-text">Contact</span></a></li>
+        <ul class="nav__list grid" id="nav-list">
+          <!-- filled by JS from config -->
         </ul>
         <i class="uil uil-times nav__close" id="nav-close"></i>
       </div>
       <div class="nav__btns">
         <i class="uil uil-moon change-theme" id="theme-button"></i>
         <span class="lang-toggle" id="lang-toggle">EN</span>
-        <div class="nav__toggle" id="nav-toggle"><i class="uil uil-apps"></i></div>
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="uil uil-apps"></i>
+        </div>
       </div>
     </nav>
   </header>
 
   <main class="main">
-    <!-- HOME -->
+    <!-- ============================================================
+         HOME / HERO
+         ============================================================ -->
     <section class="home section" id="home">
       <div class="home__container container grid">
         <div class="home__content grid">
-          <div class="home__social">
-            <a href="https://www.linkedin.com/in/alikazemi" target="_blank" class="home__social-icon"><i class="uil uil-linkedin-alt"></i></a>
-            <a href="https://github.com/Arefmtl" target="_blank" class="home__social-icon"><i class="uil uil-github-alt"></i></a>
-            <a href="https://twitter.com" target="_blank" class="home__social-icon"><i class="uil uil-twitter-alt"></i></a>
+          <!-- Social sidebar -->
+          <div class="home__social" id="home-social">
+            <!-- filled by JS -->
           </div>
+          <!-- Profile image (SVG blob mask) -->
           <div class="home__img">
             <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
               <mask id="mask0" mask-type="alpha">
-                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 35.2422 161.535 21.5255 128.383C7.80878 95.2308 13.9787 55.0885 32.5437 32.7857C51.1087 10.4829 81.4049 2.65069 104.345 8.644C127.285 14.6373 174.042 10.8571 190.312 36.4879Z"/>
+                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 35.2422 161.535 21.5255 128.383C7.80878 95.2308 13.9787 55.0885 32.5437 32.7857C51.1087 10.4829 81.4049 2.65069 104.345 8.644C127.285 14.6373 174.042 10.8571 190.312 36.4879Z" />
               </mask>
               <g mask="url(#mask0)">
-                <image class="home__blob-img" x="15" y="10" href="https://arefmtl.github.io/profile.jpg"/>
+                <image class="home__blob-img" x="15" y="10" href="" id="profile-img" />
               </g>
             </svg>
           </div>
+          <!-- Hero text -->
           <div class="home__data">
-            <h1 class="home__title"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></h1>
-            <h3 class="home__subtitle"><span class="rtl-text">دانشمند داده و مهندس یادگیری ماشین</span><span class="ltr-text">Data Scientist & ML Engineer</span></h3>
-            <p class="home__description"><span class="rtl-text">مهندس پزشکی حیات با تخصص در علم داده، یادگیری ماشین و توسعه وب. تحلیل داده، مدل‌سازی پیش‌بینی، ابزارهای هوشمند.</span><span class="ltr-text">Biomedical engineer specialized in data science, ML, and web dev. Predictive modeling, data analysis, smart tooling.</span></p>
-            <span class="home__scroll" id="home-scroll">
+            <h1 class="home__title" id="hero-name"></h1>
+            <h3 class="home__subtitle" id="hero-title"></h3>
+            <p class="home__description" id="hero-bio"></p>
+            <span class="home__scroll">
               <a href="#about" class="home__scroll-button button--flex">
                 <i class="uil uil-mouse-alt home__scroll-mouse"></i>
-                <span class="home__scroll-name"><span class="rtl-text">پایین</span><span class="ltr-text">Scroll down</span></span>
+                <span class="home__scroll-name rtl-text">پایین</span>
+                <span class="home__scroll-name ltr-text">Scroll down</span>
                 <i class="uil uil-arrow-down home__scroll-arrow"></i>
               </a>
             </span>
@@ -381,354 +97,150 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ============================================================
+         ABOUT
+         ============================================================ -->
     <section class="about section" id="about">
-      <h2 class="section__title"><span class="rtl-text">درباره من</span><span class="ltr-text">About Me</span></h2>
-      <span class="section__subtitle"><span class="rtl-text">معرفی</span><span class="ltr-text">My Introduction</span></span>
+      <h2 class="section__title rtl-text">درباره من</h2>
+      <h2 class="section__title ltr-text">About Me</h2>
+      <span class="section__subtitle rtl-text">معرفی</span>
+      <span class="section__subtitle ltr-text">My Introduction</span>
       <div class="about__container container grid">
-        <img src="https://arefmtl.github.io/profile.jpg" alt="Ali Kazemi" class="about__img">
+        <img src="" alt="" class="about__img" id="about-img" />
         <div class="about__data">
-          <p class="about__description"><span class="rtl-text">فارغ‌التحصیل مهندسی پزشکی حیات (BME) با علاقه عمیق به علم داده، یادگیری ماشین و توسعه نرم‌افزار. روی پروژه‌های متنوعی کار کرده‌ام: پیش‌بینی قیمت مسکن، تحلیل نرخ ضربان قلب، پایپ‌لاین کامل ML، شبکه‌های عصبی هایپرگراف برای تشخیص آلزایمر، و تحلیل آمادگی ایالت‌ها برای خودروهای خودران. اشتیاق به حل مسائل پیچیده با روش‌های داده‌محور.</span><span class="ltr-text">Biomedical Engineering (BME) graduate passionate about data science, machine learning, and software development. Worked on housing price prediction, heart rate analysis, full ML pipelines, hypergraph neural networks for Alzheimer's diagnosis, and autonomous vehicle readiness analysis. Passionate about solving complex problems with data-driven methods.</span></p>
-          <div class="about__info">
-            <div><span class="about__info-title">10+</span><span class="about__info-name"><span class="rtl-text">پروژه ML</span><span class="ltr-text">ML Projects</span></span></div>
-            <div><span class="about__info-title">C1</span><span class="about__info-name"><span class="rtl-text">آلمانی</span><span class="ltr-text">German</span></span></div>
-            <div><span class="about__info-title">8</span><span class="about__info-name"><span class="rtl-text">گواهینامه</span><span class="ltr-text">Certificates</span></span></div>
+          <p class="about__description" id="about-text"></p>
+          <div class="about__info" id="about-stats">
+            <!-- filled by JS -->
           </div>
           <div class="about__buttons">
-            <a download="" href="/resume.pdf" class="button button--flex"><span class="rtl-text">دانلود رزومه</span><span class="ltr-text">Download CV</span><i class="uil uil-download-alt button__icon"></i></a>
+            <a download="" href="" class="button button--flex" id="cv-download">
+              <span class="rtl-text">دانلود رزومه</span>
+              <span class="ltr-text">Download CV</span>
+              <i class="uil uil-download-alt button__icon"></i>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- ============================================================
+         SKILLS
+         ============================================================ -->
     <section class="skills section" id="skills">
-      <h2 class="section__title"><span class="rtl-text">مهارت‌ها</span><span class="ltr-text">Skills</span></h2>
-      <span class="section__subtitle"><span class="rtl-text">توانایی‌های فنی من</span><span class="ltr-text">My Technical Level</span></span>
-      <div class="skills__container container grid">
-        <div class="skills__content skills__open">
-          <div class="skills__header">
-            <i class="uil uil-brackets-curly skills__icon"></i>
-            <div><h1 class="skills__title"><span class="rtl-text">برنامه‌نویسی و ML</span><span class="ltr-text">Programming & ML</span></h1><span class="skills__subtitle"><span class="rtl-text">زبان‌ها و کتابخانه‌ها</span><span class="ltr-text">Languages & Libraries</span></span></div>
-            <i class="uil uil-angle-down skills__arrow"></i>
-          </div>
-          <div class="skills__list grid">
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Python</h3><span class="skills__number">95%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:95%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Pandas / NumPy</h3><span class="skills__number">90%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Scikit-learn</h3><span class="skills__number">85%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">PyTorch</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SQL</h3><span class="skills__number">60%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:60%"></span></div></div>
-          </div>
-        </div>
-        <div class="skills__content skills__close">
-          <div class="skills__header">
-            <i class="uil uil-server-network skills__icon"></i>
-            <div><h1 class="skills__title"><span class="rtl-text">فریم‌ورک و ابزار</span><span class="ltr-text">Frameworks & Tools</span></h1><span class="skills__subtitle"><span class="rtl-text">توسعه و استقرار</span><span class="ltr-text">Dev & Deploy</span></span></div>
-            <i class="uil uil-angle-down skills__arrow"></i>
-          </div>
-          <div class="skills__list grid">
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Git / GitHub</h3><span class="skills__number">90%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">GitHub Actions</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">HTML / CSS / JS</h3><span class="skills__number">80%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:80%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Flask</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Tailwind CSS</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div></div>
-          </div>
-        </div>
-        <div class="skills__content skills__close">
-          <div class="skills__header">
-            <i class="uil uil-chart skills__icon"></i>
-            <div><h1 class="skills__title"><span class="rtl-text">تخصصی</span><span class="ltr-text">Specialized</span></h1><span class="skills__subtitle"><span class="rtl-text">حوزه‌های تخصصی</span><span class="ltr-text">Domain Expertise</span></span></div>
-            <i class="uil uil-angle-down skills__arrow"></i>
-          </div>
-          <div class="skills__list grid">
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Classification / Regression</h3><span class="skills__number">90%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Clustering</h3><span class="skills__number">85%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Deep Learning</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">NLP / GenAI</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div></div>
-            <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Geospatial Analysis</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-          </div>
-        </div>
+      <h2 class="section__title rtl-text">مهارت‌ها</h2>
+      <h2 class="section__title ltr-text">Skills</h2>
+      <span class="section__subtitle rtl-text">توانایی‌های فنی من</span>
+      <span class="section__subtitle ltr-text">My Technical Level</span>
+      <div class="skills__container container grid" id="skills-container">
+        <!-- filled by JS -->
       </div>
     </section>
 
-    <!-- QUALIFICATION -->
+    <!-- ============================================================
+         QUALIFICATION (Education + Work)
+         ============================================================ -->
     <section class="qualification section" id="qualification">
-      <h2 class="section__title"><span class="rtl-text">سوابق</span><span class="ltr-text">Qualification</span></h2>
-      <span class="section__subtitle"><span class="rtl-text">تحصیلات و تجربه کاری</span><span class="ltr-text">Education & Work</span></span>
+      <h2 class="section__title rtl-text">سوابق</h2>
+      <h2 class="section__title ltr-text">Qualification</h2>
+      <span class="section__subtitle rtl-text">تحصیلات و تجربه کاری</span>
+      <span class="section__subtitle ltr-text">Education & Work</span>
       <div class="qualification__container container">
         <div class="qualification__tabs">
           <div class="qualification__button button--flex qualification__active" data-target="#education">
-            <i class="uil uil-graduation-cap qualification__icon"></i><span class="rtl-text">تحصیلات</span><span class="ltr-text">Education</span>
+            <i class="uil uil-graduation-cap qualification__icon"></i>
+            <span class="rtl-text">تحصیلات</span>
+            <span class="ltr-text">Education</span>
           </div>
           <div class="qualification__button button--flex" data-target="#work">
-            <i class="uil uil-briefcase-alt qualification__icon"></i><span class="rtl-text">تجربه</span><span class="ltr-text">Work</span>
+            <i class="uil uil-briefcase-alt qualification__icon"></i>
+            <span class="rtl-text">تجربه</span>
+            <span class="ltr-text">Work</span>
           </div>
         </div>
         <div class="qualification__sections">
           <div class="qualification__content qualification__active" data-content id="education">
-            <div class="qualification__data">
-              <div></div>
-              <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-              <div><h3 class="qualification__title"><span class="rtl-text">مهندسی پزشکی حیات</span><span class="ltr-text">B.Eng. Biomedical Engineering</span></h3><span class="qualification__subtitle"><span class="rtl-text">دانشگاه علوم پزشکی شیراز</span><span class="ltr-text">Shiraz University of Medical Sciences</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> 2019 – 2024</div></div>
-            </div>
+            <!-- filled by JS -->
           </div>
           <div class="qualification__content" data-content id="work">
-            <div class="qualification__data">
-              <div></div>
-              <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-              <div><h3 class="qualification__title"><span class="rtl-text">فریلنسر علم داده</span><span class="ltr-text">Freelance Data Scientist</span></h3><span class="qualification__subtitle"><span class="rtl-text">مشاريع مستقل</span><span class="ltr-text">Independent Projects</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Jul 2025 – Present</div></div>
-            </div>
-            <div class="qualification__data">
-              <div><h3 class="qualification__title"><span class="rtl-text">کارآموز فناوری اطلاعات</span><span class="ltr-text">IT Intern</span></h3><span class="qualification__subtitle">Digitalyst Agency, Shiraz</span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Jan 2024 – Jun 2025</div></div>
-              <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-              <div></div>
-            </div>
-            <div class="qualification__data">
-              <div></div>
-              <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-              <div><h3 class="qualification__title"><span class="rtl-text">توسعه‌دهنده وردپرس</span><span class="ltr-text">WordPress Developer</span></h3><span class="qualification__subtitle"><span class="rtl-text">مشتریان متنوع</span><span class="ltr-text">Various Clients</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> 2023 – 2024</div></div>
-            </div>
+            <!-- filled by JS -->
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PORTFOLIO -->
+    <!-- ============================================================
+         PORTFOLIO / PROJECTS (Swiper carousel)
+         ============================================================ -->
     <section class="portfolio section" id="portfolio">
-      <h2 class="section__title"><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></h2>
-      <span class="section__subtitle"><span class="rtl-text">پروژه‌های منتخب</span><span class="ltr-text">Featured Projects</span></span>
+      <h2 class="section__title rtl-text">نمونه‌کار</h2>
+      <h2 class="section__title ltr-text">Portfolio</h2>
+      <span class="section__subtitle rtl-text">پروژه‌های منتخب</span>
+      <span class="section__subtitle ltr-text">Featured Projects</span>
       <div class="portfolio__container container swiper-container">
-        <div class="swiper-wrapper">
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio1.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title">TOOL-BOX: ML Pipeline</h3>
-              <h4 class="portfolio__subtitle">Full ML pipeline with web UI</h4>
-              <p class="portfolio__description">End-to-end ML pipeline: data loading → EDA → preprocessing → model training → evaluation → SHAP/LIME interpretation → export. Interactive UI with Tailwind + Chart.js.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> Python, Flask, Tailwind, Chart.js, Scikit-learn</p>
-              <a href="https://github.com/Arefmtl/TOOL-BOX" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-              <a href="/toolbox/" class="button button--flex button--small button--link portfolio__button" target="_blank"><span class="rtl-text">نمایش</span><span class="ltr-text">Demo</span> <i class="uil uil-external-link-alt button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio2.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">تشخیص آلزایمر با fMRI</span><span class="ltr-text">Alzheimer's Diagnosis via fMRI</span></h3>
-              <h4 class="portfolio__subtitle">Hypergraph Neural Networks</h4>
-              <p class="portfolio__description">DICOM→NIfTI → ROI extraction (48 regions) → Graph construction (Pearson/Graphical Lasso/MI) → VHGAE → GAN augmentation → HGNN classification (AD vs CN vs MCI).</p>
-              <p class="portfolio__description"><strong>Tech:</strong> PyTorch, Nilearn, NiBabel, Scikit-learn</p>
-              <a href="https://github.com/Arefmtl/ADNI-Alzheimer-diagnosis" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio3.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">تحلیل آمادگی AV در فلوریدا</span><span class="ltr-text">Florida AV Readiness Analysis</span></h3>
-              <h4 class="portfolio__subtitle">Geospatial + Clustering + Classification</h4>
-              <p class="portfolio__description">31 rural Florida counties assessed across Physical, Digital, and Social dimensions. Composite index. 9 clustering algorithms, 6 classifiers, ANOVA/Tukey HSD/MANCOVA validation.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> GeoPandas, XGBoost, LightGBM, HDBSCAN</p>
-              <a href="https://github.com/Arefmtl/Florida-AV-readiness-analysis" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio4.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی قیمت مسکن</span><span class="ltr-text">Housing Price Prediction</span></h3>
-              <p class="portfolio__description">Regression model predicting house prices using demographic and geographic features. Full EDA, preprocessing, model comparison.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> Python, Scikit-learn, Pandas, Matplotlib</p>
-              <a href="https://github.com/Arefmtl/Housing-Price-Prediction" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio5.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی نرخ ضربان قلب</span><span class="ltr-text">Heart Rate Prediction</span></h3>
-              <p class="portfolio__description">Classification and regression for heart rate prediction from physiological signals. Signal processing, feature extraction, time series modeling.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> Python, Scikit-learn, Time Series, Signal Processing</p>
-              <a href="https://github.com/Arefmtl/HeartRate-Prediction" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio6.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی دیابت</span><span class="ltr-text">Diabetes Prediction</span></h3>
-              <p class="portfolio__description">Binary classification for diabetes risk with clinical data. Feature engineering, class balancing, medical metrics evaluation.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> Python, Scikit-learn, Medical AI, Imbalanced Data</p>
-              <a href="https://github.com/Arefmtl/Diabetes-Prediction" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio7.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">هرمس حافظه اشتراکی</span><span class="ltr-text">Hermes Shared Memory</span></h3>
-              <p class="portfolio__description">Free cloud bridge between AI agents — Cloudflare Workers + KV-based shared memory. Enables agent-to-agent communication.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> Cloudflare Workers, KV, JavaScript</p>
-              <a href="https://github.com/Arefmtl/hermes-shared-memory-" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
-          <div class="portfolio__content grid swiper-slide">
-            <img src="assets/img/portfolio8.jpg" alt="" class="portfolio__img" onerror="this.style.display='none'">
-            <div class="portfolio__data">
-              <h3 class="portfolio__title"><span class="rtl-text">داشبورد ربات تلگرام</span><span class="ltr-text">Telegram Bot Dashboard</span></h3>
-              <p class="portfolio__description">Telegram bot + admin panel — Cloudflare Workers, Next.js, AI content generation, YouTube/Spotify download.</p>
-              <p class="portfolio__description"><strong>Tech:</strong> Cloudflare Workers, Next.js, AI, Telegram API</p>
-              <a href="https://github.com/Arefmtl/arefera_admin_panel" class="button button--flex button--small portfolio__button" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a>
-            </div>
-          </div>
-
+        <div class="swiper-wrapper" id="portfolio-wrapper">
+          <!-- filled by JS -->
         </div>
-        <div class="swiper-button-next"><i class="uil uil-angle-right-b swiper-portfolio-icon"></i></div>
-        <div class="swiper-button-prev"><i class="uil uil-angle-left-b swiper-portfolio-icon"></i></div>
+        <div class="swiper-button-next">
+          <i class="uil uil-angle-right-b swiper-portfolio-icon"></i>
+        </div>
+        <div class="swiper-button-prev">
+          <i class="uil uil-angle-left-b swiper-portfolio-icon"></i>
+        </div>
         <div class="swiper-pagination"></div>
       </div>
     </section>
 
-    <!-- CERTIFICATIONS -->
+    <!-- ============================================================
+         CERTIFICATIONS
+         ============================================================ -->
     <section class="certification section" id="certification">
-      <h2 class="section__title"><span class="rtl-text">گواهینامه‌ها</span><span class="ltr-text">Certifications</span></h2>
-      <span class="section__subtitle"><span class="rtl-text">دوره‌های تکمیلی</span><span class="ltr-text">Extra Courses I've Completed</span></span>
-      <div class="certification__container container grid">
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/coursera.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%234647ae%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>C</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Generative AI Career Essentials</h3>
-            <span class="certification__subtitle">Microsoft & LinkedIn — Jan 2025</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/coursera.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%234382df%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>S</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Machine Learning</h3>
-            <span class="certification__subtitle">Stanford University (Coursera) — Mar 2024</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/coursera.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%23112e81%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>E</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Data Science in Stratified Healthcare</h3>
-            <span class="certification__subtitle">U. of Edinburgh (Coursera) — Mar 2024</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/sololearn.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%234647ae%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>P</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">One Million Prompters</h3>
-            <span class="certification__subtitle">Prompt Engineering for AI — Jan 2025</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/sololearn.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%234382df%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>S</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Machine Learning</h3>
-            <span class="certification__subtitle">Sololearn — Apr 2024</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/sololearn.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%23112e81%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>D</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Data Analytics with AI</h3>
-            <span class="certification__subtitle">Sololearn — Jul 2025</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/sololearn.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%234647ae%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2230%22 font-family=%22sans-serif%22>Py</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Python for Beginners</h3>
-            <span class="certification__subtitle">Sololearn — Dec 2022</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
-        <div class="certification__content">
-          <div>
-            <p style="text-align:center"><img src="assets/img/certs/sololearn.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 fill=%22%234382df%22 rx=%228%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2225%22 font-family=%22sans-serif%22>C#</text></svg>'" alt="" class="certification__img"></p>
-            <h3 class="certification__title">Coding Foundations</h3>
-            <span class="certification__subtitle">Sololearn — Feb 2024</span>
-          </div>
-          <a class="button button--flex button--small button--link certification__button" href="#" onclick="alert('Add your certificate URL here')">
-            <span class="rtl-text">مشاهده مدرک</span><span class="ltr-text">View Certificate</span> <i class="uil uil-arrow-right button__icon"></i>
-          </a>
-        </div>
-
+      <h2 class="section__title rtl-text">گواهینامه‌ها</h2>
+      <h2 class="section__title ltr-text">Certifications</h2>
+      <span class="section__subtitle rtl-text">دوره‌های تکمیلی</span>
+      <span class="section__subtitle ltr-text">Extra Courses</span>
+      <div class="certification__container container grid" id="cert-container">
+        <!-- filled by JS -->
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- ============================================================
+         CONTACT
+         ============================================================ -->
     <section class="contact section" id="contact">
-      <h2 class="section__title"><span class="rtl-text">تماس</span><span class="ltr-text">Contact</span></h2>
-      <span class="section__subtitle"><span class="rtl-text">بیا در تماس باشیم</span><span class="ltr-text">Get in Touch</span></span>
+      <h2 class="section__title rtl-text">تماس</h2>
+      <h2 class="section__title ltr-text">Contact</h2>
+      <span class="section__subtitle rtl-text">بیا در تماس باشیم</span>
+      <span class="section__subtitle ltr-text">Get in Touch</span>
       <div class="contact__container container grid">
-        <div>
-          <div class="contact__information">
-            <i class="uil uil-phone contact__icon"></i>
-            <div><h3 class="contact__title"><span class="rtl-text">تلفن</span><span class="ltr-text">Phone</span></h3><span class="contact__subtitle">+98 902 200 88 09</span></div>
-          </div>
-          <div class="contact__information">
-            <i class="uil uil-envelope contact__icon"></i>
-            <div><h3 class="contact__title">Email</h3><span class="contact__subtitle">arefkazemi42@gmail.com</span></div>
-          </div>
-          <div class="contact__information">
-            <i class="uil uil-map-marker contact__icon"></i>
-            <div><h3 class="contact__title"><span class="rtl-text">موقعیت</span><span class="ltr-text">Location</span></h3><span class="contact__subtitle">Shiraz, Iran</span></div>
-          </div>
+        <div id="contact-info">
+          <!-- filled by JS -->
         </div>
         <form action="" class="contact__form grid" id="contactForm">
           <div class="contact__inputs grid">
             <div class="contact__content">
-              <label for="name" class="contact__label"><span class="rtl-text">نام</span><span class="ltr-text">Name</span></label>
-              <input type="text" id="name" class="contact__input">
+              <label for="name" class="contact__label rtl-text">نام</label>
+              <label for="name" class="contact__label ltr-text">Name</label>
+              <input type="text" id="name" class="contact__input" />
             </div>
             <div class="contact__content">
               <label for="email" class="contact__label">Email</label>
-              <input type="email" id="email" class="contact__input">
+              <input type="email" id="email" class="contact__input" />
             </div>
           </div>
           <div class="contact__content">
-            <label for="subject" class="contact__label"><span class="rtl-text">موضوع</span><span class="ltr-text">Subject</span></label>
-            <input type="text" id="subject" class="contact__input">
+            <label for="subject" class="contact__label rtl-text">موضوع</label>
+            <label for="subject" class="contact__label ltr-text">Subject</label>
+            <input type="text" id="subject" class="contact__input" />
           </div>
           <div class="contact__content">
-            <label for="message" class="contact__label"><span class="rtl-text">پیام</span><span class="ltr-text">Message</span></label>
+            <label for="message" class="contact__label rtl-text">پیام</label>
+            <label for="message" class="contact__label ltr-text">Message</label>
             <textarea id="message" cols="0" rows="7" class="contact__input"></textarea>
           </div>
           <div>
             <button type="submit" class="button button--flex">
-              <span class="rtl-text">ارسال پیام</span><span class="ltr-text">Send Message</span>
+              <span class="rtl-text">ارسال پیام</span>
+              <span class="ltr-text">Send Message</span>
               <i class="uil uil-message button__icon"></i>
             </button>
           </div>
@@ -737,137 +249,38 @@
     </section>
   </main>
 
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="footer">
     <div class="footer__bg">
       <div class="footer__container container grid">
         <div>
-          <h1 class="footer__title">Ali Kazemi</h1>
-          <span class="footer__subtitle"><span class="rtl-text">دانشمند داده و مهندس یادگیری ماشین</span><span class="ltr-text">Data Scientist & ML Engineer</span></span>
+          <h1 class="footer__title" id="footer-name"></h1>
+          <span class="footer__subtitle rtl-text">دانشمند داده و مهندس یادگیری ماشین</span>
+          <span class="footer__subtitle ltr-text">Data Scientist & ML Engineer</span>
         </div>
         <ul class="footer__links">
-          <li><a href="#skills" class="footer__link"><span class="rtl-text">مهارت‌ها</span><span class="ltr-text">Skills</span></a></li>
-          <li><a href="#portfolio" class="footer__link"><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></a></li>
-          <li><a href="#contact" class="footer__link"><span class="rtl-text">تماس</span><span class="ltr-text">Contact</span></a></li>
+          <li><a href="#skills" class="footer__link rtl-text">مهارت‌ها</a><a href="#skills" class="footer__link ltr-text">Skills</a></li>
+          <li><a href="#portfolio" class="footer__link rtl-text">نمونه‌کار</a><a href="#portfolio" class="footer__link ltr-text">Portfolio</a></li>
+          <li><a href="#contact" class="footer__link rtl-text">تماس</a><a href="#contact" class="footer__link ltr-text">Contact</a></li>
         </ul>
-        <div class="footer__socials">
-          <a href="https://github.com/Arefmtl" target="_blank" class="footer__social"><i class="uil uil-github-alt"></i></a>
-          <a href="https://linkedin.com/in/alikazemi" target="_blank" class="footer__social"><i class="uil uil-linkedin-alt"></i></a>
+        <div class="footer__socials" id="footer-socials">
+          <!-- filled by JS -->
         </div>
       </div>
-      <p class="footer__copy" style="text-align:center;color:rgba(255,255,255,.7);font-size:var(--smaller-font-size);margin-top:var(--mb-1-5)">© 2025 Ali Kazemi</p>
+      <p class="footer__copy">&copy; 2025</p>
     </div>
   </footer>
 
-  <a href="#" class="scrollup" id="scroll-up"><i class="uil uil-arrow-up scrollup__icon"></i></a>
+  <!-- Scroll-up button -->
+  <a href="#" class="scrollup" id="scroll-up">
+    <i class="uil uil-arrow-up scrollup__icon"></i>
+  </a>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    const navMenu = document.getElementById('nav-menu'),
-          navToggle = document.getElementById('nav-toggle'),
-          navClose = document.getElementById('nav-close');
-    if(navToggle) navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
-    if(navClose) navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
-    document.querySelectorAll('.nav__link').forEach(n => n.addEventListener('click', () => navMenu.classList.remove('show-menu')));
-
-    const skillsHeaders = document.querySelectorAll('.skills__header');
-    function toggleSkills() {
-      let itemClass = this.parentNode.className;
-      document.querySelectorAll('.skills__content').forEach(c => c.className = 'skills__content skills__close');
-      if(itemClass === 'skills__content skills__close') this.parentNode.className = "skills__content skills__open";
-    }
-    skillsHeaders.forEach(el => el.addEventListener('click', toggleSkills));
-
-    const tabs = document.querySelectorAll('[data-target]'),
-          tabContents = document.querySelectorAll('[data-content]');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = document.querySelector(tab.dataset.target);
-        tabContents.forEach(tc => { tc.classList.remove('qualification__active'); tc.style.display = "none"; });
-        target.classList.add('qualification__active'); target.style.display = "block";
-        tabs.forEach(t => t.classList.remove('qualification__active'));
-        tab.classList.add('qualification__active');
-      });
-    });
-
-    let swiper = new Swiper('.swiper-container', {
-      cssMode: true, loop: true,
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      mousewheel: false, preventInteractionOnTransition: true,
-    });
-
-    const sections = document.querySelectorAll('section[id]');
-    function scrollActive() {
-      const scrollY = window.pageYOffset;
-      sections.forEach(current => {
-        const sectionHeight = current.offsetHeight, sectionTop = current.offsetTop - 50;
-        let sectionId = current.getAttribute('id');
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight)
-          document.querySelector('.nav__menu a[href*=' + sectionId + ']')?.classList.add('active-link');
-        else
-          document.querySelector('.nav__menu a[href*=' + sectionId + ']')?.classList.remove('active-link');
-      });
-    }
-    window.addEventListener('scroll', scrollActive);
-
-    function scrollHeader() {
-      const nav = document.getElementById('header');
-      if(this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header');
-    }
-    window.addEventListener('scroll', scrollHeader);
-
-    function scrollUp() {
-      const scrollUp = document.getElementById('scroll-up');
-      if(this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll');
-    }
-    window.addEventListener('scroll', scrollUp);
-
-    const themeButton = document.getElementById('theme-button');
-    const darkTheme = 'dark';
-    const iconTheme = 'uil-sun';
-    const selectedTheme = localStorage.getItem('selected-theme');
-    const selectedIcon = localStorage.getItem('selected-icon');
-    const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
-    const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
-    if(selectedTheme) {
-      document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
-      themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
-    }
-    themeButton.addEventListener('click', () => {
-      document.body.classList.toggle(darkTheme);
-      themeButton.classList.toggle(iconTheme);
-      localStorage.setItem('selected-theme', getCurrentTheme());
-      localStorage.setItem('selected-icon', getCurrentIcon());
-    });
-
-    const langToggle = document.getElementById('lang-toggle');
-    const html = document.documentElement;
-    const currentLang = localStorage.getItem('selected-lang') || 'fa';
-    if(currentLang === 'en') {
-      html.setAttribute('lang', 'en'); html.setAttribute('dir', 'ltr'); html.dataset.lang = 'en';
-      langToggle.textContent = 'FA';
-    }
-    langToggle.addEventListener('click', () => {
-      const isFa = html.dataset.lang === 'fa';
-      html.setAttribute('lang', isFa ? 'en' : 'fa');
-      html.setAttribute('dir', isFa ? 'ltr' : 'rtl');
-      html.dataset.lang = isFa ? 'en' : 'fa';
-      langToggle.textContent = isFa ? 'FA' : 'EN';
-      localStorage.setItem('selected-lang', isFa ? 'en' : 'fa');
-    });
-
-    document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      const orig = btn.innerHTML;
-      btn.innerHTML = '<span class="rtl-text">در حال ارسال...</span><span class="ltr-text">Sending...</span> <i class="uil uil-spinner-alt button__icon"></i>';
-      btn.disabled = true;
-      await new Promise(r => setTimeout(r, 1000));
-      alert('Message sent! (demo)');
-      e.target.reset();
-      btn.innerHTML = orig;
-      btn.disabled = false;
-    });
-  </script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/render.js"></script>
 </body>
 </html>
