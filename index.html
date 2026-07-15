@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
 :root {
   --hue:224; --first:hsl(var(--hue),77%,29%); --first-alt:hsl(var(--hue),58%,25%);
@@ -117,16 +116,18 @@ img{max-width:100%;height:auto}
 .qualification__calendar{font-size:.75rem;color:var(--text-light)}
 .qualification__rounder{display:inline-block;width:13px;height:13px;background:var(--first);border-radius:50%}
 .qualification__line{display:block;width:1px;height:100%;background:var(--first);transform:translate(6px,-7px)}
-.portfolio__container{overflow:hidden}
-.portfolio__content{padding:0 1.5rem;display:block}
+.portfolio__carousel{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem;scrollbar-width:none}
+.portfolio__carousel::-webkit-scrollbar{display:none}
+.portfolio__track{display:flex;gap:1rem;padding:0 1rem}
+.portfolio__slide{scroll-snap-align:start;flex:0 0 100%;min-width:280px;padding:0 1.5rem;box-sizing:border-box}
 .portfolio__img{width:265px;border-radius:.5rem;justify-self:center}
 .portfolio__title{font-size:var(--fs-h3);margin-bottom:.5rem}
 .portfolio__desc{font-size:var(--fs-s);margin-bottom:.75rem;color:var(--text);line-height:1.6}
 .portfolio__tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
 .portfolio__tag{font-size:.7rem;background:var(--first-light);color:var(--first);padding:2px 10px;border-radius:12px;font-weight:500}
-.swiper-button-prev::after,.swiper-button-next::after{content:''}
-.swiper-portfolio-icon{font-size:2rem;color:var(--first)}
-.swiper-pagination-bullet-active{background:var(--first)}
+
+
+
 .certification__container{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;align-items:stretch}
 .certification__card{display:block;text-decoration:none;color:inherit;height:100%}.certification__card:hover{transform:translateY(-4px)}.certification__content{background:var(--container);padding:1.2rem;border-radius:.5rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.3s;height:100%}.certification__card:hover .certification__content{box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .certification__content:hover{box-shadow:0 4px 16px rgba(0,0,0,.15)}
@@ -194,9 +195,9 @@ img{max-width:100%;height:auto}
 @media(min-width:1024px){
   .home__blob{width:320px}
   .home__social{font-size:1.5rem}
-  .swiper-portfolio-icon{font-size:3.5rem}
-  .swiper-button-prev{left:-3.5rem}
-  .swiper-button-next{right:-3.5rem}
+
+
+
   .certification__container{grid-template-columns:repeat(4,1fr)}
   .contact__form{width:460px}
   .contact__inputs{grid-template-columns:repeat(2,1fr)}
@@ -369,21 +370,20 @@ img{max-width:100%;height:auto}
 <section class="portfolio section" id="portfolio">
   <h2 class="section__title"><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></h2>
   <span class="section__subtitle"><span class="rtl-text">پروژه‌های منتخب</span><span class="ltr-text">Featured Projects</span></span>
-  <div class="portfolio__container container swiper">
-    <div class="swiper-wrapper">
-      <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title">TOOL-BOX: ML Pipeline</h3><p class="portfolio__desc"><span class="rtl-text">پایپ‌لاین کامل یادگیری ماشین: بارگذاری داده → EDA → پیش‌پردازش → آموزش مدل → ارزیابی → تفسیر SHAP/LIME → خروجی. رابط کاربری با Tailwind + Chart.js.</span><span class="ltr-text">End-to-end ML pipeline: data → EDA → preprocessing → training → evaluation → SHAP/LIME → export. Interactive UI with Tailwind + Chart.js.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Flask</span><span class="portfolio__tag">Tailwind</span><span class="portfolio__tag">Chart.js</span></div><a href="https://github.com/Arefmtl/TOOL-BOX" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
+  <div class="portfolio__carousel">
+    <div class="portfolio__track">
+      <div class="portfolio__content grid portfolio__slide"><div class="portfolio__data"><h3 class="portfolio__title">TOOL-BOX: ML Pipeline</h3><p class="portfolio__desc"><span class="rtl-text">پایپ‌لاین کامل یادگیری ماشین: بارگذاری داده → EDA → پیش‌پردازش → آموزش مدل → ارزیابی → تفسیر SHAP/LIME → خروجی. رابط کاربری با Tailwind + Chart.js.</span><span class="ltr-text">End-to-end ML pipeline: data → EDA → preprocessing → training → evaluation → SHAP/LIME → export. Interactive UI with Tailwind + Chart.js.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Flask</span><span class="portfolio__tag">Tailwind</span><span class="portfolio__tag">Chart.js</span></div><a href="https://github.com/Arefmtl/TOOL-BOX" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-      <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">تشخیص آلزایمر</span><span class="ltr-text">Alzheimer's Diagnosis</span></h3><p class="portfolio__desc"><span class="rtl-text">پایپ‌لاین یادگیری عمیق: DICOM→NIfTI → استخراج ویژگی از ۴۸ ناحیه مغزی → ساخت گراف → VHGAE → GAN → HGNN برای تشخیص AD vs CN vs MCI.</span><span class="ltr-text">Deep learning pipeline: DICOM→NIfTI → ROI extraction (48 regions) → graphs → VHGAE → GAN → HGNN classification (AD vs CN vs MCI).</span></p><div class="portfolio__tags"><span class="portfolio__tag">PyTorch</span><span class="portfolio__tag">Nilearn</span><span class="portfolio__tag">NiBabel</span><span class="portfolio__tag">Medical AI</span></div><a href="https://github.com/Arefmtl/ADNI-Alzheimer-diagnosis" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
+      <div class="portfolio__content grid portfolio__slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">تشخیص آلزایمر</span><span class="ltr-text">Alzheimer's Diagnosis</span></h3><p class="portfolio__desc"><span class="rtl-text">پایپ‌لاین یادگیری عمیق: DICOM→NIfTI → استخراج ویژگی از ۴۸ ناحیه مغزی → ساخت گراف → VHGAE → GAN → HGNN برای تشخیص AD vs CN vs MCI.</span><span class="ltr-text">Deep learning pipeline: DICOM→NIfTI → ROI extraction (48 regions) → graphs → VHGAE → GAN → HGNN classification (AD vs CN vs MCI).</span></p><div class="portfolio__tags"><span class="portfolio__tag">PyTorch</span><span class="portfolio__tag">Nilearn</span><span class="portfolio__tag">NiBabel</span><span class="portfolio__tag">Medical AI</span></div><a href="https://github.com/Arefmtl/ADNI-Alzheimer-diagnosis" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-      <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">تحلیل آمادگی AV در فلوریدا</span><span class="ltr-text">Florida AV Readiness</span></h3><p class="portfolio__desc"><span class="rtl-text">بررسی آمادگی ۳۱ شهرستان فلوریدا برای خودروهای خودران. شاخص ترکیبی فیزیکی + دیجیتال + اجتماعی. ۹ الگوریتم خوشه‌بندی، ۶ دسته‌بند، ANOVA.</span><span class="ltr-text">AV readiness for 31 rural Florida counties. Composite index (Physical + Digital + Social). 9 clustering algos, 6 classifiers, ANOVA validation.</span></p><div class="portfolio__tags"><span class="portfolio__tag">GeoPandas</span><span class="portfolio__tag">XGBoost</span><span class="portfolio__tag">LightGBM</span><span class="portfolio__tag">Geospatial</span></div><a href="https://github.com/Arefmtl/Florida-AV-readiness-analysis" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
+      <div class="portfolio__content grid portfolio__slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">تحلیل آمادگی AV در فلوریدا</span><span class="ltr-text">Florida AV Readiness</span></h3><p class="portfolio__desc"><span class="rtl-text">بررسی آمادگی ۳۱ شهرستان فلوریدا برای خودروهای خودران. شاخص ترکیبی فیزیکی + دیجیتال + اجتماعی. ۹ الگوریتم خوشه‌بندی، ۶ دسته‌بند، ANOVA.</span><span class="ltr-text">AV readiness for 31 rural Florida counties. Composite index (Physical + Digital + Social). 9 clustering algos, 6 classifiers, ANOVA validation.</span></p><div class="portfolio__tags"><span class="portfolio__tag">GeoPandas</span><span class="portfolio__tag">XGBoost</span><span class="portfolio__tag">LightGBM</span><span class="portfolio__tag">Geospatial</span></div><a href="https://github.com/Arefmtl/Florida-AV-readiness-analysis" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-      <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی قیمت مسکن</span><span class="ltr-text">Housing Price Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">مدل رگرسیون پیش‌بینی قیمت خانه با ویژگی‌های جمعیتی و جغرافیایی. EDA کامل، پیش‌پردازش، مقایسه مدل‌ها.</span><span class="ltr-text">Regression model for house prices. Full EDA, preprocessing, model comparison.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Scikit-learn</span><span class="portfolio__tag">Pandas</span></div><a href="https://github.com/Arefmtl/Housing-Price-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
+      <div class="portfolio__content grid portfolio__slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی قیمت مسکن</span><span class="ltr-text">Housing Price Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">مدل رگرسیون پیش‌بینی قیمت خانه با ویژگی‌های جمعیتی و جغرافیایی. EDA کامل، پیش‌پردازش، مقایسه مدل‌ها.</span><span class="ltr-text">Regression model for house prices. Full EDA, preprocessing, model comparison.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Scikit-learn</span><span class="portfolio__tag">Pandas</span></div><a href="https://github.com/Arefmtl/Housing-Price-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-      <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی نرخ ضربان قلب</span><span class="ltr-text">Heart Rate Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">کلاسیفیکیشن و رگرسیون ضربان قلب از سیگنال‌های فیزیولوژیک. پردازش سیگنال، استخراج ویژگی، مدل‌سازی سری زمانی.</span><span class="ltr-text">Classification & regression for heart rate from physiological signals. Signal processing, feature extraction, time series modeling.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Time Series</span><span class="portfolio__tag">Classification</span></div><a href="https://github.com/Arefmtl/HeartRate-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
+      <div class="portfolio__content grid portfolio__slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی نرخ ضربان قلب</span><span class="ltr-text">Heart Rate Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">کلاسیفیکیشن و رگرسیون ضربان قلب از سیگنال‌های فیزیولوژیک. پردازش سیگنال، استخراج ویژگی، مدل‌سازی سری زمانی.</span><span class="ltr-text">Classification & regression for heart rate from physiological signals. Signal processing, feature extraction, time series modeling.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Time Series</span><span class="portfolio__tag">Classification</span></div><a href="https://github.com/Arefmtl/HeartRate-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-      <div class="portfolio__content grid swiper-slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی دیابت</span><span class="ltr-text">Diabetes Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">دسته‌بندی باینری ریسک دیابت با داده‌های بالینی. مهندسی ویژگی، بالانس کلاس‌ها، ارزیابی پزشکی.</span><span class="ltr-text">Binary classification for diabetes risk. Feature engineering, class balancing, medical metrics.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Medical AI</span><span class="portfolio__tag">Imbalanced Data</span></div><a href="https://github.com/Arefmtl/Diabetes-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
+      <div class="portfolio__content grid portfolio__slide"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی دیابت</span><span class="ltr-text">Diabetes Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">دسته‌بندی باینری ریسک دیابت با داده‌های بالینی. مهندسی ویژگی، بالانس کلاس‌ها، ارزیابی پزشکی.</span><span class="ltr-text">Binary classification for diabetes risk. Feature engineering, class balancing, medical metrics.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Medical AI</span><span class="portfolio__tag">Imbalanced Data</span></div><a href="https://github.com/Arefmtl/Diabetes-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
 
-    <div class="swiper-pagination"></div>
   </div>
 </section>
 
@@ -453,7 +453,6 @@ img{max-width:100%;height:auto}
 
 <a href="#" class="scrollup" id="scroll-up"><i class="uil uil-arrow-up scrollup__icon"></i></a>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 // ── Mobile menu ──
 const nm=document.getElementById('nav-menu'),nt=document.getElementById('nav-toggle'),nc=document.getElementById('nav-close');
@@ -476,8 +475,6 @@ document.querySelectorAll('[data-target]').forEach(t=>t.addEventListener('click'
   t.classList.add('qualification__active');
 }));
 
-// ── Swiper ──
-new Swiper('.swiper',{slidesPerView:1,spaceBetween:0,loop:true,mousewheel:{forceToAxis:true,sensitivity:1},pagination:{el:'.swiper-pagination',clickable:true},keyboard:{enabled:true}});
 
 // ── Scrollspy + effects ──
 const sc=document.querySelectorAll('section[id]');
