@@ -150,6 +150,21 @@ input:focus,textarea:focus,select:focus{border-color:#4382df!important;box-shado
   <p class="subtitle rtl-only">اطلاعات خود را وارد کنید و یک پورتفولیوی حرفه‌ای دریافت کنید</p>
   <p class="subtitle ltr-only">Fill in your info and get a professional portfolio template</p>
 
+    <!-- CTA Hero -->
+  <div class="card" style="text-align:center;padding:2rem;margin-bottom:1.5rem;background:linear-gradient(135deg,#112e81,#4647ae);color:white;border:none">
+    <h2 style="font-size:1.5rem;margin-bottom:.5rem;color:white">
+      <span class="rtl-only">🚀 آماده ساختن پورتفولیو حرفه‌ای؟</span>
+      <span class="ltr-only">🚀 Ready to build your portfolio?</span>
+    </h2>
+    <p style="opacity:.85;margin-bottom:1.2rem;font-size:.9rem">
+      <span class="rtl-only">۵ مرحله ساده — اطلاعاتت رو وارد کن، خروجی بگیر</span>
+      <span class="ltr-only">5 simple steps — fill in your info, get your portfolio</span>
+    </p>
+    <button class="btn btn-primary" onclick="nextStep()" style="font-size:1rem;padding:.8rem 2rem">
+      <span class="rtl-only">شروع کن 🎯</span>
+      <span class="ltr-only">Start Now 🎯</span>
+    </button>
+  </div>
   <!-- Steps -->
   <div class="steps" id="steps">
     <div class="step active" data-step="1"><span class="num">1</span> <span class="rtl-only">اطلاعات شخصی</span><span class="ltr-only">Personal</span></div>
@@ -180,7 +195,25 @@ input:focus,textarea:focus,select:focus{border-color:#4382df!important;box-shado
         <label><span class="rtl-only">لینک رزومه (PDF)</span><span class="ltr-only">Resume Link (PDF)</span></label>
         <input id="resumeUrl" value="/resume.pdf" />
       </div>
-    </div>
+    <div class="form-group full" style="margin-top:.5rem">
+      <label><span class="rtl-only">📸 عکس پروفایل</span><span class="ltr-only">📸 Profile Photo</span></label>
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid var(--light);flex-shrink:0;background:#eef4ff;display:flex;align-items:center;justify-content:center;position:relative" id="photoPreview">
+          <img id="photoImg" src="" style="width:100%;height:100%;object-fit:cover;display:none" alt="Preview">
+          <span id="photoPlaceholder" style="font-size:2.5rem;color:var(--second)">👤</span>
+        </div>
+        <div>
+          <input type="file" id="photoInput" accept="image/*" style="display:none">
+          <button class="btn btn-secondary" onclick="document.getElementById('photoInput').click()" type="button">
+            <i class="uil uil-camera"></i> <span class="rtl-only">انتخاب عکس</span><span class="ltr-only">Choose Photo</span>
+          </button>
+          <p style="font-size:.7rem;color:var(--muted);margin-top:.3rem">
+            <span class="rtl-only">JPEG/PNG — ۱:۱ خودکار برش می‌خوره</span>
+            <span class="ltr-only">JPEG/PNG — auto-cropped to 1:1</span>
+          </p>
+        </div>
+      </div>
+    </div>    </div>
   </div>
 
   <!-- STEP 2: Skills -->
