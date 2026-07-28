@@ -205,6 +205,16 @@ img{max-width:100%;height:auto}
 ::-webkit-scrollbar{width:.6rem}
 ::-webkit-scrollbar-track{background:hsl(var(--hue),12%,90%);border-radius:.5rem}
 ::-webkit-scrollbar-thumb{background:hsl(var(--hue),12%,80%);border-radius:.5rem}
+
+/* ── Micro-interactions ────────────────────────────── */
+.card,.certification__card{transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease!important}
+.card:hover,.certification__card:hover{transform:translateY(-3px) scale(1.005)!important;box-shadow:0 8px 24px rgba(17,46,129,.15)!important}
+.button,.btn{transition:transform .15s,box-shadow .2s,background .2s!important}
+.button:active,.btn:active{transform:scale(.96)!important}
+input,textarea,select{transition:border-color .2s,box-shadow .2s,transform .15s}
+input:focus,textarea:focus,select:focus{border-color:#4382DF!important;box-shadow:0 0 0 3px rgba(67,130,223,.15)!important;transform:translateY(-1px)}
+.fade-in{animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
