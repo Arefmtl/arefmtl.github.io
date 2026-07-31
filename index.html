@@ -45,6 +45,8 @@ img{max-width:100%;height:auto}
 .header{width:100%;position:fixed;bottom:0;left:0;z-index:100;background:var(--body);transition:.3s}
 .nav{max-width:968px;height:var(--h);display:flex;justify-content:space-between;align-items:center}
 .nav__logo,.nav__toggle{color:var(--title);font-weight:500}
+.nav__logo{display:flex;align-items:center;gap:.5rem}
+.nav__logo-img{width:32px;height:32px;border-radius:8px}
 .nav__logo:hover{color:var(--first)}
 .nav__toggle{font-size:1.1rem;cursor:pointer}
 @media(max-width:767px){
@@ -222,7 +224,7 @@ input:focus,textarea:focus,select:focus{border-color:#4382DF!important;box-shado
 <!-- ===== HEADER ===== -->
 <header class="header" id="header">
   <nav class="nav container">
-    <a href="#" class="nav__logo"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></a>
+    <a href="#" class="nav__logo"><img src="/logo.svg" alt="AK" class="nav__logo-img"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></a>
     <div class="nav__menu" id="nav-menu">
       <ul class="nav__list grid">
         <li class="nav__item"><a href="#home" class="nav__link active-link"><i class="uil uil-estate nav__icon"></i><span class="rtl-text">خانه</span><span class="ltr-text">Home</span></a></li>
