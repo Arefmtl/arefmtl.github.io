@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#112E81" />
   <link rel="icon" type="image/png" href="/icon.png">
   <link rel="apple-touch-icon" href="/icon.png">
-  <title>Portfolio Builder — Ali Kazemi</title>
+  <title>Portfolio Builder — Free Portfolio Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -144,7 +144,7 @@ input:focus,textarea:focus,select:focus{border-color:#4382df!important;box-shado
 <div class="container">
   <h1>
     🧩 Portfolio Builder
-    <small>— by Ali Kazemi</small>
+    <small>— Free Portfolio Generator</small>
     <span class="lang-toggle" id="langToggle" onclick="toggleLang()">🇬🇧 EN</span>
   </h1>
   <p class="subtitle rtl-only">اطلاعات خود را وارد کنید و یک پورتفولیوی حرفه‌ای دریافت کنید</p>
@@ -179,18 +179,18 @@ input:focus,textarea:focus,select:focus{border-color:#4382df!important;box-shado
     <h2><span class="rtl-only">📋 اطلاعات شخصی</span><span class="ltr-only">📋 Personal Info</span></h2>
     <p class="desc"><span class="rtl-only">نام، عنوان، بیوگرافی و لینک‌های اجتماعی خود را وارد کنید</span><span class="ltr-only">Your name, title, bio, and social links</span></p>
     <div class="form-grid">
-      <div class="form-group"><label><span class="rtl-only">نام (فارسی)</span><span class="ltr-only">Name (Persian)</span></label><input id="fa_name" value="علی کاظمی" /></div>
-      <div class="form-group"><label><span class="rtl-only">نام (انگلیسی)</span><span class="ltr-only">Name (English)</span></label><input id="en_name" value="Ali Kazemi" /></div>
-      <div class="form-group"><label><span class="rtl-only">عنوان (فارسی)</span><span class="ltr-only">Title (Persian)</span></label><input id="fa_title" value="دانشمند داده و مهندس یادگیری ماشین" /></div>
-      <div class="form-group"><label><span class="rtl-only">عنوان (انگلیسی)</span><span class="ltr-only">Title (English)</span></label><input id="en_title" value="Data Scientist & ML Engineer" /></div>
-      <div class="form-group full"><label><span class="rtl-only">بیوگرافی (فارسی)</span><span class="ltr-only">Bio (Persian)</span></label><textarea id="fa_bio" rows="2">مهندس پزشکی حیات با تخصص در علم داده، یادگیری ماشین و توسعه وب.</textarea></div>
-      <div class="form-group full"><label><span class="rtl-only">بیوگرافی (انگلیسی)</span><span class="ltr-only">Bio (English)</span></label><textarea id="en_bio" rows="2">Biomedical engineer specialized in data science, ML, and web dev.</textarea></div>
-      <div class="form-group"><label>LinkedIn</label><input id="linkedin" value="https://linkedin.com/in/ali-kzm" /></div>
-      <div class="form-group"><label>GitHub</label><input id="github" value="https://github.com/Arefmtl" /></div>
-      <div class="form-group"><label><span class="rtl-only">موقعیت (فارسی)</span><span class="ltr-only">Location (Persian)</span></label><input id="fa_loc" value="شیراز، ایران" /></div>
-      <div class="form-group"><label><span class="rtl-only">موقعیت (انگلیسی)</span><span class="ltr-only">Location (English)</span></label><input id="en_loc" value="Shiraz, Iran" /></div>
-      <div class="form-group"><label>Email</label><input id="email" value="arefkazemi42@gmail.com" /></div>
-      <div class="form-group"><label><span class="rtl-only">تلفن</span><span class="ltr-only">Phone</span></label><input id="phone" value="+98 902 200 88 09" /></div>
+      <div class="form-group"><label><span class="rtl-only">نام (فارسی)</span><span class="ltr-only">Name (Persian)</span></label><input id="fa_name" placeholder="مثلاً: نام شما" /></div>
+      <div class="form-group"><label><span class="rtl-only">نام (انگلیسی)</span><span class="ltr-only">Name (English)</span></label><input id="en_name" placeholder="e.g. Your Name" /></div>
+      <div class="form-group"><label><span class="rtl-only">عنوان (فارسی)</span><span class="ltr-only">Title (Persian)</span></label><input id="fa_title" placeholder="مثلاً: دانشمند داده" /></div>
+      <div class="form-group"><label><span class="rtl-only">عنوان (انگلیسی)</span><span class="ltr-only">Title (English)</span></label><input id="en_title" placeholder="e.g. Data Scientist" /></div>
+      <div class="form-group full"><label><span class="rtl-only">بیوگرافی (فارسی)</span><span class="ltr-only">Bio (Persian)</span></label><textarea id="fa_bio" rows="2" placeholder="مثلاً: مهندس داده با اشتیاق به یادگیری ماشین..."></textarea></div>
+      <div class="form-group full"><label><span class="rtl-only">بیوگرافی (انگلیسی)</span><span class="ltr-only">Bio (English)</span></label><textarea id="en_bio" rows="2" placeholder="e.g. Data engineer passionate about ML..."></textarea></div>
+      <div class="form-group"><label>LinkedIn</label><input id="linkedin" placeholder="https://linkedin.com/in/yourname" /></div>
+      <div class="form-group"><label>GitHub</label><input id="github" placeholder="https://github.com/yourname" /></div>
+      <div class="form-group"><label><span class="rtl-only">موقعیت (فارسی)</span><span class="ltr-only">Location (Persian)</span></label><input id="fa_loc" placeholder="مثلاً: تهران، ایران" /></div>
+      <div class="form-group"><label><span class="rtl-only">موقعیت (انگلیسی)</span><span class="ltr-only">Location (English)</span></label><input id="en_loc" placeholder="e.g. Tehran, Iran" /></div>
+      <div class="form-group"><label>Email</label><input id="email" placeholder="you@email.com" /></div>
+      <div class="form-group"><label><span class="rtl-only">تلفن</span><span class="ltr-only">Phone</span></label><input id="phone" placeholder="+98 ..." /></div>
       <div class="form-group full">
         <label><span class="rtl-only">لینک رزومه (PDF)</span><span class="ltr-only">Resume Link (PDF)</span></label>
         <input id="resumeUrl" value="/resume.pdf" />
@@ -404,9 +404,7 @@ function addSkill() {
 
 /* ── PROJECTS ───────────────────────────────────────────── */
 const defaultProjects = [
-  { title_fa: 'TOOL-BOX: پایپ‌لاین ML', title_en: 'TOOL-BOX: ML Pipeline', desc_fa: 'پایپ‌لاین کامل ML', desc_en: 'End-to-end ML pipeline', tech: 'Python, Flask, Tailwind', github: 'https://github.com/Arefmtl/TOOL-BOX' },
-  { title_fa: 'تشخیص آلزایمر با fMRI', title_en: 'Alzheimer\'s Diagnosis', desc_fa: 'شبکه‌های هایپرگراف', desc_en: 'Hypergraph neural networks', tech: 'PyTorch, Nilearn', github: 'https://github.com/Arefmtl/ADNI-Alzheimer-diagnosis' },
-  { title_fa: 'پیش‌بینی قیمت مسکن', title_en: 'Housing Price Prediction', desc_fa: 'مدل رگرسیون', desc_en: 'Regression model', tech: 'Python, Scikit-learn', github: 'https://github.com/Arefmtl/Housing-Price-Prediction' },
+  { title_fa: 'نام پروژه', title_en: 'Project Name', desc_fa: 'توضیح کوتاه', desc_en: 'Short description', tech: 'Python, Scikit-learn', github: 'https://github.com/yourname/project' },
 ];
 
 function renderProjects() {
@@ -456,10 +454,7 @@ function addProject() {
 
 /* ── CERTIFICATES ───────────────────────────────────────── */
 const defaultCerts = [
-  { title: 'Generative AI Career Essentials', subtitle: 'Microsoft & LinkedIn — Jan 2025', url: '#' },
-  { title: 'Machine Learning', subtitle: 'Stanford (Coursera) — Mar 2024', url: '#' },
-  { title: 'Data Science in Stratified Healthcare', subtitle: 'U. Edinburgh — Mar 2024', url: '#' },
-  { title: 'Machine Learning', subtitle: 'Sololearn — Apr 2024', url: '#' },
+  { title: 'نام گواهینامه', subtitle: 'ناشر — تاریخ', url: '#' },
 ];
 
 function renderCerts() {
