@@ -1,224 +1,884 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#112E81">
-<link rel="icon" type="image/png" href="/icon.png">
-<link rel="apple-touch-icon" href="/icon.png">
-<title>Ali Kazemi | Data Scientist & ML Engineer</title>
+<meta name="theme-color" content="#0F172A">
+<meta name="description" content="Ali Kazemi — Data Scientist & ML Engineer. Building intelligent tools with Python, TensorFlow, and modern web technologies.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<title>Ali Kazemi — Data Scientist & ML Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ═══════════════════════════════════════════════════
+   DESIGN TOKENS — Portfolio
+   Variance: 6 | Motion: 5 | Density: 4
+   ═══════════════════════════════════════════════════ */
 :root {
-  --hue:224; --first:hsl(var(--hue),77%,29%); --first-alt:hsl(var(--hue),58%,25%);
-  --first-light:hsl(212,67%,85%); --title:hsl(var(--hue),8%,15%); --text:hsl(var(--hue),8%,45%);
-  --text-light:hsl(var(--hue),8%,65%); --input:hsl(var(--hue),70%,96%);
-  --body:hsl(var(--hue),60%,99%); --container:#FFF;
-  --font:'Poppins',sans-serif; --h:3.5rem;
-  --fs-big:2rem; --fs-h1:1.5rem; --fs-h2:1.25rem; --fs-h3:1.125rem; --fs-n:.938rem; --fs-s:.813rem;
-  --m1:1rem; --m1-5:1.5rem; --m2:2rem; --m3:3rem;
+  /* Color System */
+  --color-bg: #FAFBFC;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-subtle: #F1F5F9;
+  --color-surface: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-border-subtle: #F1F5F9;
+  
+  /* Text */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+  
+  /* Accent — Navy Blue */
+  --color-accent: #1E3A5F;
+  --color-accent-light: #3B82F6;
+  --color-accent-lighter: #DBEAFE;
+  --color-accent-dark: #1E293B;
+  
+  /* Status */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  
+  /* Type Scale — Modular (1.25) */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  
+  /* Layout */
+  --container-max: 1200px;
+  --container-narrow: 800px;
+  
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  
+  /* Shadows — Elevation */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
 }
-@media(min-width:968px) {
-  :root{--fs-big:3rem;--fs-h1:2.25rem;--fs-h2:1.5rem;--fs-h3:1.25rem;--fs-n:1rem;--fs-s:.875rem;}
+
+/* ═══════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-body.dark {
-  --first-alt:hsl(var(--hue),30%,8%); --title:hsl(var(--hue),8%,95%);
-  --text:hsl(var(--hue),8%,75%); --input:hsl(var(--hue),29%,16%);
-  --body:hsl(222,25%,10%); --container:hsl(224,28%,14%);
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{margin:0 0 var(--h) 0;font-family:var(--font);font-size:var(--fs-n);background:var(--body);color:var(--text);transition:.3s}
-h1,h2,h3,h4{color:var(--title);font-weight:600}
-ul{list-style:none}
-a{text-decoration:none}
-img{max-width:100%;height:auto}
-.section{padding:2rem 0 4rem}
-.section__title{font-size:var(--fs-h1)}
-.section__subtitle{display:block;font-size:var(--fs-s);margin-bottom:var(--m3)}
-.section__title,.section__subtitle{text-align:center}
-.container{max-width:768px;margin:0 var(--m1-5)}
-.grid{display:grid;gap:1.5rem}
-.header{width:100%;position:fixed;bottom:0;left:0;z-index:100;background:var(--body);transition:.3s}
-.nav{max-width:968px;height:var(--h);display:flex;justify-content:space-between;align-items:center}
-.nav__logo,.nav__toggle{color:var(--title);font-weight:500}
-.nav__logo{display:flex;align-items:center;gap:.5rem}
-.nav__logo-img{width:32px;height:32px;border-radius:8px}
-.nav__logo:hover{color:var(--first)}
-.nav__toggle{font-size:1.1rem;cursor:pointer}
-@media(max-width:767px){
-  .nav__menu{position:fixed;bottom:-100%;left:0;width:100%;background:var(--body);padding:2rem 1.5rem 4rem;box-shadow:0 -1px 4px rgba(0,0,0,.15);border-radius:1.5rem 1.5rem 0 0;transition:.3s}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
 }
-.nav__list{grid-template-columns:repeat(3,1fr);gap:2rem}
-.nav__link{display:flex;flex-direction:column;align-items:center;font-size:var(--fs-s);color:var(--title);font-weight:500}
-.nav__link:hover{color:var(--first)}
-.nav__icon{font-size:1.2rem}
-.nav__close{position:absolute;right:1.3rem;bottom:.5rem;font-size:1.5rem;cursor:pointer;color:var(--first)}
-.show-menu{bottom:0}
-.active-link{color:var(--first)}
-.scroll-header{box-shadow:0 -1px 4px rgba(0,0,0,.15)}
-.nav__btns{display:flex;align-items:center;gap:1rem}
-.change-theme{font-size:1.25rem;color:var(--title);cursor:pointer}
-.lang-toggle{font-size:.8rem;color:var(--title);cursor:pointer;background:var(--input);border:1px solid var(--first-light);border-radius:20px;padding:2px 10px;font-weight:600;transition:.2s}
-.lang-toggle:hover{background:var(--first-light)}
-.button{display:inline-block;background:var(--first);color:#FFF;padding:1rem;border-radius:.5rem;font-weight:500;transition:.3s;border:none;cursor:pointer}
-.button:hover{background:var(--first-alt)}
-.button--flex{display:inline-flex;align-items:center;gap:.5rem}
-.button--small{padding:.75rem 1rem}
-.button--link{background:transparent;color:var(--first);padding:0}
-.home__container{gap:1rem}
-.home__content{grid-template-columns:.5fr 3fr;padding-top:3.5rem;align-items:center}
-.home__social{display:grid;grid-template-columns:max-content;row-gap:1rem}
-.home__social-icon{font-size:1.25rem;color:var(--first)}
-.home__blob{width:200px;fill:var(--first)}
-.home__blob-img{width:100%;height:100%;object-fit:cover}
-.home__data{grid-column:1/3}
-.home__title{font-size:var(--fs-big)}
-.home__subtitle{font-size:var(--fs-h3);color:var(--text);font-weight:500;margin-bottom:.75rem}
-.home__description{margin-bottom:var(--m2)}
-.home__scroll{display:none}
-.home__scroll-button{color:var(--first);display:inline-flex;align-items:center}
-.home__scroll-button:hover{transform:translateY(.25rem)}
-.home__scroll-mouse{font-size:2rem}
-.about__img{width:200px;border-radius:.5rem;justify-self:center;align-self:center;border:3px solid var(--first-light)}
-.about__description{margin-bottom:var(--m2-5,2.5rem);line-height:1.8}
-.about__info{display:flex;justify-content:space-evenly;margin-bottom:var(--m2-5,2.5rem)}
-.about__info-title{font-size:var(--fs-h2);font-weight:600;color:var(--title);display:block;text-align:center}
-.about__info-name{font-size:.75rem;display:block;text-align:center}
-.about__buttons{display:flex;justify-content:center}
-.skills__container{row-gap:0}
-.skills__header{display:flex;align-items:center;margin-bottom:var(--m2-5,2.5rem);cursor:pointer}
-.skills__icon,.skills__arrow{font-size:2rem;color:var(--first)}
-.skills__icon{margin-inline-end:.75rem}
-.skills__title{font-size:var(--fs-h3)}
-.skills__subtitle{font-size:var(--fs-s);color:var(--text-light)}
-.skills__arrow{margin-inline-start:auto;transition:.4s}
-.skills__list{row-gap:1.5rem}
-.skills__titles{display:flex;justify-content:space-between;margin-bottom:.5rem}
-.skills__name{font-size:var(--fs-n);font-weight:500}
-.skills__bar,.skills__percentage{height:5px;border-radius:.25rem}
-.skills__bar{background:var(--first-light)}
-.skills__percentage{display:block;background:var(--first)}
-.skills__close .skills__list{height:0;overflow:hidden}
-.skills__open .skills__list{height:max-content;margin-bottom:var(--m2-5,2.5rem)}
-.skills__open .skills__arrow{transform:rotate(-180deg)}
-.qualification__tabs{display:flex;justify-content:center;margin-bottom:var(--m2)}
-.qualification__button{font-size:var(--fs-h3);font-weight:500;color:var(--text);margin:0 var(--m1);cursor:pointer;display:inline-flex;align-items:center;gap:.25rem}
-.qualification__button:hover{color:var(--first)}
-.qualification__icon{font-size:1.8rem}
-.qualification__active{color:var(--first)}
-.qualification__content[data-content]{display:none}
-.qualification__active[data-content]{display:block}
-.qualification__data{display:grid;grid-template-columns:1fr max-content 1fr;column-gap:1.5rem}
-.qualification__title{font-size:var(--fs-n);font-weight:500}
-.qualification__subtitle{font-size:var(--fs-s);margin-bottom:var(--m1)}
-.qualification__calendar{font-size:.75rem;color:var(--text-light)}
-.qualification__rounder{display:inline-block;width:13px;height:13px;background:var(--first);border-radius:50%}
-.qualification__line{display:block;width:1px;height:100%;background:var(--first);transform:translate(6px,-7px)}
-.portfolio__carousel{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem;scrollbar-width:none}
-.portfolio__carousel::-webkit-scrollbar{display:none}
-.portfolio__track{display:flex;gap:1rem;padding:0 1rem}
-.card project-card{scroll-snap-align:start;flex:0 0 100%;min-width:280px;padding:0 1.5rem;box-sizing:border-box;display:block}
-.portfolio__img{width:265px;border-radius:.5rem;justify-self:center}
-.portfolio__title{font-size:var(--fs-h3);margin-bottom:.5rem}
-.portfolio__desc{font-size:var(--fs-s);margin-bottom:.75rem;color:var(--text);line-height:1.6}
-.portfolio__tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
-.portfolio__tag{font-size:.7rem;background:var(--first-light);color:var(--first);padding:2px 10px;border-radius:12px;font-weight:500}
 
-
-
-.certification__container{grid-template-columns:repeat(4,1fr);gap:1.25rem;align-items:stretch;max-width:1200px;margin:0 auto;padding:0 1rem}
-@media(max-width:900px){.certification__container{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.certification__container{grid-template-columns:1fr}}
-.certification__card{display:block;text-decoration:none;color:inherit;height:100%}.certification__card:hover{transform:translateY(-4px)}.certification__content{background:var(--container);padding:1.2rem;border-radius:.5rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.3s;height:100%;display:flex;flex-direction:column;justify-content:center}.certification__card:hover .certification__content{box-shadow:0 8px 24px rgba(0,0,0,.12)}
-.certification__content:hover{box-shadow:0 4px 16px rgba(0,0,0,.15)}
-.certification__img{width:80px;height:80px;object-fit:contain;margin:0 auto .75rem;border-radius:.5rem}
-.certification__title{font-size:var(--fs-h3);margin-bottom:.25rem}
-.certification__subtitle{display:block;font-size:.75rem;color:var(--text-light);margin-bottom:var(--m1)}
-.contact__container{row-gap:3rem}
-.contact__information{display:flex;margin-bottom:var(--m2);align-items:center;gap:.75rem}
-.contact__icon{font-size:2rem;color:var(--first)}
-.contact__title{font-size:var(--fs-h3);font-weight:500}
-.contact__subtitle{font-size:var(--fs-s);color:var(--text-light)}
-.contact__content{background:var(--input);border-radius:.5rem;padding:.75rem 1rem .25rem}
-.contact__label{font-size:.75rem;color:var(--title)}
-.contact__input{width:100%;background:transparent;color:var(--text);font-family:var(--font);font-size:var(--fs-n);border:none;outline:none;padding:.25rem 0}
-.footer{padding-top:2rem}
-.footer__bg{background:var(--first);padding:2rem 0 3rem}
-.footer__title{font-size:var(--fs-h1);margin-bottom:.25rem;color:#FFF}
-.footer__subtitle{font-size:var(--fs-s);color:rgba(255,255,255,.8)}
-.footer__links{display:flex;flex-direction:column;row-gap:1rem}
-.footer__link{color:rgba(255,255,255,.8)}
-.footer__link:hover{color:var(--first-light)}
-.footer__social{font-size:1.25rem;margin-inline-end:1.5rem;color:#FFF}
-.footer__social:hover{color:var(--first-light)}
-.footer__copy{text-align:center;color:rgba(255,255,255,.5);font-size:.75rem;margin-top:1.5rem}
-.scrollup{position:fixed;right:1rem;bottom:-20%;background:var(--first);opacity:.8;padding:0 .3rem;border-radius:.4rem;z-index:10;transition:.4s}
-.scrollup:hover{background:var(--first-alt)}
-.scrollup__icon{font-size:1.5rem;color:#FFF}
-.show-scroll{bottom:5rem}
-.ltr-text{display:none}
-[lang="en"] .ltr-text{display:inline}
-[lang="en"] .rtl-text{display:none}
-[lang="fa"] .ltr-text{display:none}
-[lang="fa"] .rtl-text{display:inline}
-@media(min-width:568px){
-  .home__content{grid-template-columns:max-content 1fr 1fr}
-  .home__data{grid-column:initial}
-  .home__img{order:1;justify-self:center}
-  .about__container,.portfolio__content,.contact__container,.footer__container{grid-template-columns:repeat(2,1fr)}
-  .qualification__sections{grid-template-columns:.6fr;justify-content:center}
+a {
+  color: inherit;
+  text-decoration: none;
 }
-@media(min-width:768px){
-  .container{margin:0 auto}
-  body{margin:0}
-  .section{padding:6rem 0 2rem}
-  .header{top:0;bottom:initial}
-  .nav{height:calc(var(--h)+1.5rem)}
-  .nav__icon,.nav__close,.nav__toggle{display:none}
-  .nav__list{display:flex;gap:2rem}
-  .nav__menu{margin-left:auto}
-  .home__container{row-gap:5rem}
-  .home__content{padding-top:5.5rem}
-  .home__blob{width:270px}
-  .home__scroll{display:block}
-  .about__img{width:300px}
-  .about__description{text-align:initial}
-  .about__info{justify-content:space-between}
-  .about__buttons{justify-content:initial}
-  .portfolio__img{width:320px}
-  .portfolio__content{align-items:center}
-  .footer__container{grid-template-columns:repeat(3,1fr)}
-  .footer__bg{padding:3rem 0 3.5rem}
-  .footer__links{flex-direction:row;gap:2rem}
-  .footer__socials{justify-self:flex-end}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
-@media(min-width:1024px){
-  .home__blob{width:320px}
-  .home__social{font-size:1.5rem}
 
+ul { list-style: none; }
 
-
-
-  .contact__form{width:460px}
-  .contact__inputs{grid-template-columns:repeat(2,1fr)}
+/* ═══════════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════════ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
 }
-::-webkit-scrollbar{width:.6rem}
-::-webkit-scrollbar-track{background:hsl(var(--hue),12%,90%);border-radius:.5rem}
-::-webkit-scrollbar-thumb{background:hsl(var(--hue),12%,80%);border-radius:.5rem}
 
-/* ── Micro-interactions ────────────────────────────── */
-.card,.certification__card{transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease!important}
-.card:hover,.certification__card:hover{transform:translateY(-3px) scale(1.005)!important;box-shadow:0 8px 24px rgba(17,46,129,.15)!important}
-.button,.btn{transition:transform .15s,box-shadow .2s,background .2s!important}
-.button:active,.btn:active{transform:scale(.96)!important}
-input,textarea,select{transition:border-color .2s,box-shadow .2s,transform .15s}
-input:focus,textarea:focus,select:focus{border-color:#4382DF!important;box-shadow:0 0 0 3px rgba(67,130,223,.15)!important;transform:translateY(-1px)}
-.fade-in{animation:fadeUp .5s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.section {
+  padding: var(--space-24) 0;
+}
+
+.section--alt {
+  background: var(--color-bg-subtle);
+}
+
+/* ═══════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 251, 252, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--color-text-primary);
+}
+
+.nav__logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.nav__link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast);
+}
+
+.nav__link:hover,
+.nav__link.active {
+  color: var(--color-text-primary);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.nav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+.nav__toggle svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-primary);
+}
+
+/* ═══════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn--primary:hover {
+  background: var(--color-accent-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--secondary {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-accent-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.btn--ghost:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+/* ═══════════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.hero__content {
+  max-width: 680px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-accent-lighter);
+  color: var(--color-accent);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  margin-bottom: var(--space-6);
+}
+
+.hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-success);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero__title {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.02em;
+}
+
+.hero__title-accent {
+  color: var(--color-accent-light);
+}
+
+.hero__description {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-8);
+  max-width: 540px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.hero__stats {
+  display: flex;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
+}
+
+.hero__stat {
+  text-align: left;
+}
+
+.hero__stat-value {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__stat-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* ═══════════════════════════════════════════════════
+   ABOUT SECTION
+   ═══════════════════════════════════════════════════ */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+.about__image-wrapper {
+  position: relative;
+}
+
+.about__image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.about__image-accent {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 120px;
+  height: 120px;
+  background: var(--color-accent-lighter);
+  border-radius: var(--radius-xl);
+  z-index: -1;
+}
+
+.about__content h2 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: var(--space-6);
+}
+
+.about__text {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-8);
+}
+
+.about__highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.about__highlight {
+  text-align: center;
+  padding: var(--space-6);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.about__highlight-value {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.about__highlight-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* ═══════════════════════════════════════════════════
+   SKILLS SECTION
+   ═══════════════════════════════════════════════════ */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.skill-card {
+  padding: var(--space-6);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.skill-card:hover {
+  border-color: var(--color-accent-light);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.skill-card__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-lighter);
+  color: var(--color-accent);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xl);
+}
+
+.skill-card__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.skill-card__description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.skill-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.skill-tag {
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+}
+
+/* ═══════════════════════════════════════════════════
+   PROJECTS SECTION
+   ═══════════════════════════════════════════════════ */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--space-8);
+}
+
+.project-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+}
+
+.project-card__image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-card__content {
+  padding: var(--space-6);
+}
+
+.project-card__category {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-accent-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.project-card__title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.project-card__description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.project-card__links {
+  display: flex;
+  gap: var(--space-4);
+}
+
+/* ═══════════════════════════════════════════════════
+   CERTIFICATIONS SECTION
+   ═══════════════════════════════════════════════════ */
+.certs__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-6);
+}
+
+.cert-card {
+  padding: var(--space-5);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card:hover {
+  border-color: var(--color-accent-light);
+  box-shadow: var(--shadow-md);
+}
+
+.cert-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.cert-card__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-lighter);
+  color: var(--color-accent);
+  border-radius: var(--radius-md);
+  font-size: var(--text-lg);
+  flex-shrink: 0;
+}
+
+.cert-card__issuer {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.cert-card__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: var(--space-2);
+}
+
+.cert-card__date {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: auto;
+}
+
+/* ═══════════════════════════════════════════════════
+   CONTACT SECTION
+   ═══════════════════════════════════════════════════ */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-12);
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contact__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.contact__item-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-lighter);
+  color: var(--color-accent);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xl);
+  flex-shrink: 0;
+}
+
+.contact__item-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.contact__item-value {
+  font-weight: 500;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form__label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.form__input,
+.form__textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  transition: all var(--duration-fast);
+}
+
+.form__input:focus,
+.form__textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════ */
+.footer {
+  background: var(--color-accent-dark);
+  color: white;
+  padding: var(--space-12) 0 var(--space-8);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-8);
+}
+
+.footer__brand-description {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-sm);
+  margin-top: var(--space-4);
+  max-width: 300px;
+}
+
+.footer__heading {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__link {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  transition: color var(--duration-fast);
+}
+
+.footer__link:hover {
+  color: white;
+}
+
+.footer__socials {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.footer__social {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: white;
+  transition: all var(--duration-fast);
+}
+
+.footer__social:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer__bottom {
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav__links {
+    display: none;
+  }
+  
+  .nav__toggle {
+    display: block;
+  }
+  
+  .hero__title {
+    font-size: var(--text-4xl);
+  }
+  
+  .hero__stats {
+    gap: var(--space-8);
+  }
+  
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  
+  .form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
 </style>
 </head>
 <body>
@@ -226,305 +886,589 @@ input:focus,textarea:focus,select:focus{border-color:#4382DF!important;box-shado
 <!-- ===== HEADER ===== -->
 <header class="header" id="header">
   <nav class="nav container">
-    <a href="#" class="nav__logo"><img src="/icon.png" alt="AK" class="nav__logo-img"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></a>
-    <div class="nav__menu" id="nav-menu">
-      <ul class="nav__list grid">
-        <li class="nav__item"><a href="#home" class="nav__link active-link"><i class="uil uil-estate nav__icon"></i><span class="rtl-text">خانه</span><span class="ltr-text">Home</span></a></li>
-        <li class="nav__item"><a href="#about" class="nav__link"><i class="uil uil-user nav__icon"></i><span class="rtl-text">درباره</span><span class="ltr-text">About</span></a></li>
-        <li class="nav__item"><a href="#skills" class="nav__link"><i class="uil uil-file-alt nav__icon"></i><span class="rtl-text">مهارت‌ها</span><span class="ltr-text">Skills</span></a></li>
-        <li class="nav__item"><a href="#portfolio" class="nav__link"><i class="uil uil-scenery nav__icon"></i><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></a></li>
-        <li class="nav__item"><a href="#certification" class="nav__link"><i class="uil uil-newspaper nav__icon"></i><span class="rtl-text">گواهینامه‌ها</span><span class="ltr-text">Certs</span></a></li>
-        <li class="nav__item"><a href="#contact" class="nav__link"><i class="uil uil-message nav__icon"></i><span class="rtl-text">تماس</span><span class="ltr-text">Contact</span></a></li>
-      </ul>
-      <i class="uil uil-times nav__close" id="nav-close"></i>
-    </div>
-    <div class="nav__btns">
-      <i class="uil uil-moon change-theme" id="theme-button"></i>
-      <span class="lang-toggle" id="lang-toggle">EN</span>
-      <div class="nav__toggle" id="nav-toggle"><i class="uil uil-apps"></i></div>
+    <a href="#" class="nav__logo">
+      <img src="/favicon.png" alt="AK" class="nav__logo-img">
+      <span>Ali Kazemi</span>
+    </a>
+    
+    <ul class="nav__links">
+      <li><a href="#about" class="nav__link">About</a></li>
+      <li><a href="#skills" class="nav__link">Skills</a></li>
+      <li><a href="#projects" class="nav__link">Projects</a></li>
+      <li><a href="#certs" class="nav__link">Certifications</a></li>
+      <li><a href="#contact" class="nav__link">Contact</a></li>
+    </ul>
+    
+    <div class="nav__actions">
+      <a href="/resume.pdf" class="btn btn--primary" target="_blank">Resume</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
   </nav>
 </header>
 
 <main>
-<!-- ===== HOME ===== -->
-<section class="home section" id="home">
-  <div class="home__container container grid">
-    <div class="home__content grid">
-      <div class="home__social">
-        <a href="https://linkedin.com/in/ali-kzm" target="_blank" class="home__social-icon"><i class="uil uil-linkedin-alt"></i></a>
-        <a href="https://github.com/Arefmtl" target="_blank" class="home__social-icon"><i class="uil uil-github-alt"></i></a>
-        <a href="https://twitter.com" target="_blank" class="home__social-icon"><i class="uil uil-twitter-alt"></i></a>
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero__content fade-in">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        <span>Open to opportunities</span>
       </div>
-      <div class="home__img">
-        <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
-          <mask id="mask0" mask-type="alpha">
-            <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.147 35.2422 161.535 21.5255 128.383C7.80878 95.2308 13.9787 55.0885 32.5437 32.7857C51.1087 10.4829 81.4049 2.65069 104.345 8.644C127.285 14.6373 174.042 10.8571 190.312 36.4879Z"/>
-          </mask>
-          <g mask="url(#mask0)">
-            <image class="home__blob-img" x="0" y="0" width="200" height="187" preserveAspectRatio="xMidYMid slice" href="https://arefmtl.github.io/profile.jpg"/>
-          </g>
-        </svg>
+      
+      <h1 class="hero__title">
+        Building <span class="hero__title-accent">intelligent tools</span> with data science & ML
+      </h1>
+      
+      <p class="hero__description">
+        Data Scientist & ML Engineer specializing in predictive modeling, NLP, and end-to-end ML pipelines. 
+        Transforming complex data into actionable insights and production-ready solutions.
+      </p>
+      
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn btn--secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in Touch
+        </a>
       </div>
-      <div class="home__data">
-        <h1 class="home__title"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></h1>
-        <h3 class="home__subtitle"><span class="rtl-text">دانشمند داده و مهندس یادگیری ماشین</span><span class="ltr-text">Data Scientist & ML Engineer</span></h3>
-        <p class="home__description"><span class="rtl-text">مهندس پزشکی حیات با تخصص در علم داده، یادگیری ماشین و توسعه وب. تحلیل داده، مدل‌سازی پیش‌بینی، ابزارهای هوشمند.</span><span class="ltr-text">Biomedical engineer specialized in data science, ML, and web dev. Predictive modeling, data analysis, smart tooling.</span></p>
-        <span class="home__scroll"><a href="#about" class="home__scroll-button button--flex"><i class="uil uil-mouse-alt home__scroll-mouse"></i><span class="home__scroll-name"><span class="rtl-text">پایین</span><span class="ltr-text">Scroll down</span></span><i class="uil uil-arrow-down home__scroll-arrow"></i></a></span>
+      
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <div class="hero__stat-value">10+</div>
+          <div class="hero__stat-label">ML Projects</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value">11</div>
+          <div class="hero__stat-label">Certifications</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-value">C1</div>
+          <div class="hero__stat-label">German (CEFR)</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== ABOUT ===== -->
-<section class="about section" id="about">
-  <h2 class="section__title"><span class="rtl-text">درباره من</span><span class="ltr-text">About Me</span></h2>
-  <span class="section__subtitle"><span class="rtl-text">معرفی</span><span class="ltr-text">My Introduction</span></span>
-  <div class="about__container container grid">
-    <img src="https://arefmtl.github.io/about.jpg" alt="Ali Kazemi" class="about__img">
-    <div class="about__data">
-      <p class="about__description"><span class="rtl-text">فارغ‌التحصیل مهندسی پزشکی حیات (BME) با علاقه عمیق به علم داده، یادگیری ماشین و توسعه نرم‌افزار. روی پروژه‌های متنوعی کار کرده‌ام: پیش‌بینی قیمت مسکن، تحلیل نرخ ضربان قلب، پایپ‌لاین کامل ML، شبکه‌های عصبی هایپرگراف برای تشخیص آلزایمر، و تحلیل آمادگی ایالت‌ها برای خودروهای خودران. اشتیاق به حل مسائل پیچیده با روش‌های داده‌محور.</span><span class="ltr-text">Biomedical Engineering (BME) graduate passionate about data science, machine learning, and software development. Worked on housing price prediction, heart rate analysis, full ML pipelines, hypergraph neural networks for Alzheimer's diagnosis, and autonomous vehicle readiness analysis. Passionate about solving complex problems with data-driven methods.</span></p>
-      <div class="about__info">
-        <div><span class="about__info-title">10+</span><span class="about__info-name"><span class="rtl-text">پروژه ML</span><span class="ltr-text">ML Projects</span></span></div>
-        <div><span class="about__info-title">C1</span><span class="about__info-name"><span class="rtl-text">آلمانی</span><span class="ltr-text">German</span></span></div>
-        <div><span class="about__info-title">8</span><span class="about__info-name"><span class="rtl-text">گواهینامه</span><span class="ltr-text">Certificates</span></span></div>
+<section class="section section--alt" id="about">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__image-wrapper fade-in">
+        <img src="https://arefmtl.github.io/about.jpg" alt="Ali Kazemi" class="about__image">
+        <div class="about__image-accent"></div>
       </div>
-      <div class="about__buttons"><a href="/resume.pdf" class="button button--flex"><span class="rtl-text">دانلود رزومه</span><span class="ltr-text">Download CV</span><i class="uil uil-download-alt button__icon"></i></a></div>
+      
+      <div class="about__content fade-in">
+        <h2>About Me</h2>
+        <p class="about__text">
+          Biomedical Engineering (BME) graduate passionate about data science, machine learning, and software development. 
+          I've worked on diverse projects: housing price prediction, heart rate analysis, full ML pipelines, 
+          hypergraph neural networks for Alzheimer's diagnosis, and autonomous vehicle readiness analysis.
+        </p>
+        <p class="about__text">
+          Currently seeking Data Science/ML opportunities in Germany. C1 German proficiency with a commitment 
+          to building impactful, privacy-first tools that solve real problems.
+        </p>
+        
+        <div class="about__highlights">
+          <div class="about__highlight">
+            <div class="about__highlight-value">10+</div>
+            <div class="about__highlight-label">ML Projects</div>
+          </div>
+          <div class="about__highlight">
+            <div class="about__highlight-value">C1</div>
+            <div class="about__highlight-label">German</div>
+          </div>
+          <div class="about__highlight">
+            <div class="about__highlight-value">11</div>
+            <div class="about__highlight-label">Certificates</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ===== SKILLS ===== -->
-<section class="skills section" id="skills">
-  <h2 class="section__title"><span class="rtl-text">مهارت‌ها</span><span class="ltr-text">Skills</span></h2>
-  <span class="section__subtitle"><span class="rtl-text">توانایی‌های فنی من</span><span class="ltr-text">My Technical Level</span></span>
-  <div class="skills__container container grid" id="skillsContainer">
-    <div class="skills__content skills__open">
-      <div class="skills__header"><i class="uil uil-brackets-curly skills__icon"></i><div><h1 class="skills__title"><span class="rtl-text">برنامه‌نویسی و ML</span><span class="ltr-text">Programming & ML</span></h1><span class="skills__subtitle"><span class="rtl-text">زبان‌ها و کتابخانه‌ها</span><span class="ltr-text">Languages & Libraries</span></span></div><i class="uil uil-angle-down skills__arrow"></i></div>
-      <div class="skills__list grid">
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Python</h3><span class="skills__number">95%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:95%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Pandas / NumPy</h3><span class="skills__number">90%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Scikit-learn</h3><span class="skills__number">85%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">PyTorch</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">SQL</h3><span class="skills__number">60%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:60%"></span></div></div>
-      </div>
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section__header fade-in">
+      <h2>Skills & Expertise</h2>
+      <p>Technologies and tools I work with</p>
     </div>
-    <div class="skills__content skills__close">
-      <div class="skills__header"><i class="uil uil-server-network skills__icon"></i><div><h1 class="skills__title"><span class="rtl-text">فریم‌ورک و ابزار</span><span class="ltr-text">Frameworks & Tools</span></h1><span class="skills__subtitle"><span class="rtl-text">توسعه و استقرار</span><span class="ltr-text">Dev & Deploy</span></span></div><i class="uil uil-angle-down skills__arrow"></i></div>
-      <div class="skills__list grid">
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Git / GitHub</h3><span class="skills__number">90%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">GitHub Actions</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">HTML / CSS / JS</h3><span class="skills__number">80%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:80%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Flask</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Tailwind CSS</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div></div>
-      </div>
-    </div>
-    <div class="skills__content skills__close">
-      <div class="skills__header"><i class="uil uil-chart skills__icon"></i><div><h1 class="skills__title"><span class="rtl-text">تخصصی</span><span class="ltr-text">Specialized</span></h1><span class="skills__subtitle"><span class="rtl-text">حوزه‌های تخصصی</span><span class="ltr-text">Domain Expertise</span></span></div><i class="uil uil-angle-down skills__arrow"></i></div>
-      <div class="skills__list grid">
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Classification / Regression</h3><span class="skills__number">90%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:90%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Clustering</h3><span class="skills__number">85%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:85%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Deep Learning</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">NLP / GenAI</h3><span class="skills__number">75%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:75%"></span></div></div>
-        <div class="skills__data"><div class="skills__titles"><h3 class="skills__name">Geospatial Analysis</h3><span class="skills__number">70%</span></div><div class="skills__bar"><span class="skills__percentage" style="width:70%"></span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== QUALIFICATION ===== -->
-<section class="qualification section" id="qualification">
-  <h2 class="section__title"><span class="rtl-text">سوابق</span><span class="ltr-text">Qualification</span></h2>
-  <span class="section__subtitle"><span class="rtl-text">تحصیلات و تجربه کاری</span><span class="ltr-text">Education & Work</span></span>
-  <div class="qualification__container container">
-    <div class="qualification__tabs">
-      <div class="qualification__button button--flex qualification__active" data-target="#education"><i class="uil uil-graduation-cap qualification__icon"></i><span class="rtl-text">تحصیلات</span><span class="ltr-text">Education</span></div>
-      <div class="qualification__button button--flex" data-target="#work"><i class="uil uil-briefcase-alt qualification__icon"></i><span class="rtl-text">تجربه</span><span class="ltr-text">Work</span></div>
-    </div>
-    <div class="qualification__sections">
-      <div class="qualification__content qualification__active" data-content id="education">
-        <div class="qualification__data">
-          <div></div>
-          <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-          <div><h3 class="qualification__title"><span class="rtl-text">کارشناسی مهندسی پزشکی حیات</span><span class="ltr-text">B.Sc. Biomedical Engineering (BME)</span></h3><span class="qualification__subtitle"><span class="rtl-text">موسسه آموزش عالی آپادانا، شیراز</span><span class="ltr-text">Apadana Institute of Higher Education, Shiraz</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Sep 2019 – Sep 2023</div></div>
+    
+    <div class="skills__grid">
+      <div class="skill-card fade-in">
+        <div class="skill-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
-        <div class="qualification__data">
-          <div><h3 class="qualification__title"><span class="rtl-text">کاردانی کامپیوترگرافیک</span><span class="ltr-text">Associate Degree in Computer Graphics</span></h3><span class="qualification__subtitle"><span class="rtl-text">دانشگاه فنی و حرفه‌ای حبیب‌بن‌مظاهر، شیراز</span><span class="ltr-text">Habib ibn Mazaher Technical University, Shiraz</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Jun 2024 – Sep 2024</div></div>
-          <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-          <div></div>
-        </div>
-        <div class="qualification__data">
-          <div></div>
-          <div><span class="qualification__rounder"></span></div>
-          <div><h3 class="qualification__title"><span class="rtl-text">دیپلم علوم تجربی</span><span class="ltr-text">High School Diploma in Sciences</span></h3><span class="qualification__subtitle"><span class="rtl-text">دبیرستان ناصریان، شیراز</span><span class="ltr-text">Naserian High School, Shiraz</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Okt 2014 – Sep 2018</div></div>
+        <h3 class="skill-card__title">Machine Learning</h3>
+        <p class="skill-card__description">Deep learning, neural networks, predictive modeling, and NLP</p>
+        <div class="skill-card__tags">
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">Scikit-learn</span>
         </div>
       </div>
-      <div class="qualification__content" data-content id="work">
-        <div class="qualification__data">
-          <div></div>
-          <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-          <div><h3 class="qualification__title"><span class="rtl-text">فریلنسر علم داده</span><span class="ltr-text">Freelance Data Scientist</span></h3><span class="qualification__subtitle"><span class="rtl-text">مشاريع مستقل</span><span class="ltr-text">Independent Projects</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Jul 2025 – Present</div></div>
+      
+      <div class="skill-card fade-in">
+        <div class="skill-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
-        <div class="qualification__data">
-          <div><h3 class="qualification__title"><span class="rtl-text">کارآموز فناوری اطلاعات</span><span class="ltr-text">IT Intern</span></h3><span class="qualification__subtitle">Digitalyst Agency, Shiraz</span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> Jan 2024 – Jun 2025</div></div>
-          <div><span class="qualification__rounder"></span><span class="qualification__line"></span></div>
-          <div></div>
+        <h3 class="skill-card__title">Data Science</h3>
+        <p class="skill-card__description">Statistical analysis, data visualization, and feature engineering</p>
+        <div class="skill-card__tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">SQL</span>
         </div>
-        <div class="qualification__data">
-          <div></div>
-          <div><span class="qualification__rounder"></span></div>
-          <div><h3 class="qualification__title"><span class="rtl-text">توسعه‌دهنده وردپرس</span><span class="ltr-text">WordPress Developer</span></h3><span class="qualification__subtitle"><span class="rtl-text">مشتریان متنوع</span><span class="ltr-text">Various Clients</span></span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i> 2023–2024</div></div>
+      </div>
+      
+      <div class="skill-card fade-in">
+        <div class="skill-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-4V6"/><path d="M14 10l7.046-2.939A.5.5 0 0 1 22 7.403v9.194a.5.5 0 0 1-.954.158L14 10z"/><rect x="2" y="6" width="12" height="12" rx="2"/></svg>
+        </div>
+        <h3 class="skill-card__title">Web Development</h3>
+        <p class="skill-card__description">Full-stack applications with modern frameworks</p>
+        <div class="skill-card__tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Node.js</span>
+        </div>
+      </div>
+      
+      <div class="skill-card fade-in">
+        <div class="skill-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3 class="skill-card__title">Cloud & DevOps</h3>
+        <p class="skill-card__description">Cloud deployment, CI/CD, and containerization</p>
+        <div class="skill-card__tags">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
-<section class="portfolio section" id="portfolio">
-  <h2 class="section__title"><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></h2>
-  <span class="section__subtitle"><span class="rtl-text">پروژه‌های منتخب</span><span class="ltr-text">Featured Projects</span></span>
-  <div class="grid grid-2">
-      <div class="card project-card"><div class="portfolio__data"><h3 class="portfolio__title">TOOL-BOX: ML Pipeline</h3><p class="portfolio__desc"><span class="rtl-text">پایپ‌لاین کامل یادگیری ماشین: بارگذاری داده → EDA → پیش‌پردازش → آموزش مدل → ارزیابی → تفسیر SHAP/LIME → خروجی. رابط کاربری با Tailwind + Chart.js.</span><span class="ltr-text">End-to-end ML pipeline: data → EDA → preprocessing → training → evaluation → SHAP/LIME → export. Interactive UI with Tailwind + Chart.js.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Flask</span><span class="portfolio__tag">Tailwind</span><span class="portfolio__tag">Chart.js</span></div><a href="https://github.com/Arefmtl/TOOL-BOX" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
-
-      <div class="card project-card"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">تشخیص آلزایمر</span><span class="ltr-text">Alzheimer's Diagnosis</span></h3><p class="portfolio__desc"><span class="rtl-text">پایپ‌لاین یادگیری عمیق: DICOM→NIfTI → استخراج ویژگی از ۴۸ ناحیه مغزی → ساخت گراف → VHGAE → GAN → HGNN برای تشخیص AD vs CN vs MCI.</span><span class="ltr-text">Deep learning pipeline: DICOM→NIfTI → ROI extraction (48 regions) → graphs → VHGAE → GAN → HGNN classification (AD vs CN vs MCI).</span></p><div class="portfolio__tags"><span class="portfolio__tag">PyTorch</span><span class="portfolio__tag">Nilearn</span><span class="portfolio__tag">NiBabel</span><span class="portfolio__tag">Medical AI</span></div><a href="https://github.com/Arefmtl/ADNI-Alzheimer-diagnosis" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
-
-      <div class="card project-card"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">تحلیل آمادگی AV در فلوریدا</span><span class="ltr-text">Florida AV Readiness</span></h3><p class="portfolio__desc"><span class="rtl-text">بررسی آمادگی ۳۱ شهرستان فلوریدا برای خودروهای خودران. شاخص ترکیبی فیزیکی + دیجیتال + اجتماعی. ۹ الگوریتم خوشه‌بندی، ۶ دسته‌بند، ANOVA.</span><span class="ltr-text">AV readiness for 31 rural Florida counties. Composite index (Physical + Digital + Social). 9 clustering algos, 6 classifiers, ANOVA validation.</span></p><div class="portfolio__tags"><span class="portfolio__tag">GeoPandas</span><span class="portfolio__tag">XGBoost</span><span class="portfolio__tag">LightGBM</span><span class="portfolio__tag">Geospatial</span></div><a href="https://github.com/Arefmtl/Florida-AV-readiness-analysis" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
-
-      <div class="card project-card"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی قیمت مسکن</span><span class="ltr-text">Housing Price Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">مدل رگرسیون پیش‌بینی قیمت خانه با ویژگی‌های جمعیتی و جغرافیایی. EDA کامل، پیش‌پردازش، مقایسه مدل‌ها.</span><span class="ltr-text">Regression model for house prices. Full EDA, preprocessing, model comparison.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Scikit-learn</span><span class="portfolio__tag">Pandas</span></div><a href="https://github.com/Arefmtl/Housing-Price-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
-
-      <div class="card project-card"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی نرخ ضربان قلب</span><span class="ltr-text">Heart Rate Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">کلاسیفیکیشن و رگرسیون ضربان قلب از سیگنال‌های فیزیولوژیک. پردازش سیگنال، استخراج ویژگی، مدل‌سازی سری زمانی.</span><span class="ltr-text">Classification & regression for heart rate from physiological signals. Signal processing, feature extraction, time series modeling.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Time Series</span><span class="portfolio__tag">Classification</span></div><a href="https://github.com/Arefmtl/HeartRate-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
-
-      <div class="card project-card"><div class="portfolio__data"><h3 class="portfolio__title"><span class="rtl-text">پیش‌بینی دیابت</span><span class="ltr-text">Diabetes Prediction</span></h3><p class="portfolio__desc"><span class="rtl-text">دسته‌بندی باینری ریسک دیابت با داده‌های بالینی. مهندسی ویژگی، بالانس کلاس‌ها، ارزیابی پزشکی.</span><span class="ltr-text">Binary classification for diabetes risk. Feature engineering, class balancing, medical metrics.</span></p><div class="portfolio__tags"><span class="portfolio__tag">Python</span><span class="portfolio__tag">Medical AI</span><span class="portfolio__tag">Imbalanced Data</span></div><a href="https://github.com/Arefmtl/Diabetes-Prediction" class="button button--flex button--small" target="_blank">GitHub <i class="uil uil-arrow-right button__icon"></i></a></div></div>
-
+<!-- ===== PROJECTS ===== -->
+<section class="section section--alt" id="projects">
+  <div class="container">
+    <div class="section__header fade-in">
+      <h2>Featured Projects</h2>
+      <p>Tools and solutions I've built</p>
+    </div>
+    
+    <div class="projects__grid">
+      <div class="project-card fade-in">
+        <div class="project-card__content">
+          <div class="project-card__category">Chrome Extension</div>
+          <h3 class="project-card__title">AutoFill Pro</h3>
+          <p class="project-card__description">
+            AI-powered job application assistant with Gmail integration, interview prep, 
+            skill gap analysis, and ATS verification. 174 tests passing.
+          </p>
+          <div class="project-card__tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Chrome API</span>
+            <span class="skill-tag">AI</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/Arefmtl/autofill-pro" class="btn btn--ghost" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+            <a href="https://arefmtl.github.io/autofill-pro/" class="btn btn--ghost" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card fade-in">
+        <div class="project-card__content">
+          <div class="project-card__category">Chrome Extension</div>
+          <h3 class="project-card__title">MarkItDown</h3>
+          <p class="project-card__description">
+            Convert files (PDF, DOCX, XLSX, images) to Markdown for AI chatbots. 
+            Save tokens, keep context. OCR support included.
+          </p>
+          <div class="project-card__tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">PDF.js</span>
+            <span class="skill-tag">Tesseract.js</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/Arefmtl/markitdown-extension" class="btn btn--ghost" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card fade-in">
+        <div class="project-card__content">
+          <div class="project-card__category">AI / NLP</div>
+          <h3 class="project-card__title">Alzheimer's Detection</h3>
+          <p class="project-card__description">
+            Hypergraph neural network for Alzheimer's diagnosis from medical data. 
+            Research project with published paper.
+          </p>
+          <div class="project-card__tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">Neuroscience</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card fade-in">
+        <div class="project-card__content">
+          <div class="project-card__category">Data Science</div>
+          <h3 class="project-card__title">Autonomous Vehicle Readiness</h3>
+          <p class="project-card__description">
+            Analysis of US states' readiness for autonomous vehicles using 
+            infrastructure, regulation, and technology data.
+          </p>
+          <div class="project-card__tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">Visualization</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ===== CERTIFICATIONS ===== -->
-<section class="certification section" id="certification">
-  <h2 class="section__title"><span class="rtl-text">گواهینامه‌ها</span><span class="ltr-text">Certifications</span></h2>
-  <span class="section__subtitle"><span class="rtl-text">دوره‌های تکمیلی</span><span class="ltr-text">Extra Courses</span></span>
-  <div class="certification__container container grid">
-    <a href="assets/img/certs/genai-certificate.jpg" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/genai-certificate.jpg" alt="" class="certification__img"><h3 class="certification__title">Career Essentials in Generative AI</h3><span class="certification__subtitle">Microsoft & LinkedIn — Jan 2025</span></div></a>
-    <a href="https://coursera.org/verify/A1T2FMTP6H" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/stanford-ml.jpg" alt="" class="certification__img"><h3 class="certification__title">Machine Learning</h3><span class="certification__subtitle">Stanford University (Coursera) — Mar 2024</span></div></a>
-    <a href="https://coursera.org/verify/46EVV7YHRb" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/edinburgh-ds.jpg" alt="" class="certification__img"><h3 class="certification__title">Data Science in Stratified Healthcare & Precision Medicine</h3><span class="certification__subtitle">The University of Edinburgh (Coursera) — Mar 2024</span></div></a>
-    <a href="assets/img/certs/one-million-prompters.jpg" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/one-million-prompters.jpg" alt="" class="certification__img"><h3 class="certification__title">One Million Prompters</h3><span class="certification__subtitle">Prompt Engineering for AI — Dubai Future Foundation, Jan 2025</span></div></a>
-    <a href="https://www.sololearn.com/certificates/CC-DMCIF08K" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/sololearn-ml.jpg" alt="" class="certification__img"><h3 class="certification__title">Machine Learning</h3><span class="certification__subtitle">Sololearn — Apr 2024</span></div></a>
-    <a href="https://www.sololearn.com/certificates/CC-UZSCGZZ4" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/sololearn-data-analytics.jpg" alt="" class="certification__img"><h3 class="certification__title">Data Analytics with AI</h3><span class="certification__subtitle">Sololearn — Jul 2025</span></div></a>
-    <a href="https://www.sololearn.com/certificates/CT-2DPML69N" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/sololearn-python.jpg" alt="" class="certification__img"><h3 class="certification__title">Python für Anfänger</h3><span class="certification__subtitle">Sololearn — Dez 2022</span></div></a>
-    <a href="https://www.sololearn.com/certificates/CC-BOEA6T9P" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/sololearn-coding.jpg" alt="" class="certification__img"><h3 class="certification__title">Coding Foundations</h3><span class="certification__subtitle">Sololearn — Feb 2024</span></div></a>
-    <a href="assets/img/certs/praktikum.pdf" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/digitalyst-logo.jpg" alt="" class="certification__img"><h3 class="certification__title">Praktikum Bescheinigung</h3><span class="certification__subtitle">IT Intern — Digitalyst Agency, 2024–2025</span></div></a>
-    <a href="assets/img/certs/sprachzertifikat.jpg" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/sprachzertifikat.jpg" alt="" class="certification__img"><h3 class="certification__title">telc Deutsch C1 Hochschule</h3><span class="certification__subtitle">German C1 (CEFR) — Sep 2024</span></div></a>
-    <a href="assets/img/certs/icaht-2021.jpg" target="_blank" class="certification__card"><div class="certification__content"><img src="assets/img/certs/icaht-2021.jpg" alt="" class="certification__img"><h3 class="certification__title">ICAHT 2021 Congress</h3><span class="certification__subtitle">AI in Medicine — Shiraz University of Medical Sciences, Dec 2021</span></div></a>
+<section class="section" id="certs">
+  <div class="container">
+    <div class="section__header fade-in">
+      <h2>Certifications</h2>
+      <p>Professional development and learning</p>
+    </div>
+    
+    <div class="certs__grid">
+      <a href="https://coursera.org/verify/A1T2FMTP6H" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">Stanford University</span>
+        </div>
+        <h3 class="cert-card__title">Machine Learning</h3>
+        <span class="cert-card__date">Mar 2024</span>
+      </a>
+      
+      <a href="https://coursera.org/verify/46EVV7YHRb" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">University of Edinburgh</span>
+        </div>
+        <h3 class="cert-card__title">Data Science in Stratified Healthcare</h3>
+        <span class="cert-card__date">Mar 2024</span>
+      </a>
+      
+      <a href="#" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">Microsoft & LinkedIn</span>
+        </div>
+        <h3 class="cert-card__title">Career Essentials in Generative AI</h3>
+        <span class="cert-card__date">Jan 2025</span>
+      </a>
+      
+      <a href="#" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">Dubai Future Foundation</span>
+        </div>
+        <h3 class="cert-card__title">One Million Prompters</h3>
+        <span class="cert-card__date">Jan 2025</span>
+      </a>
+      
+      <a href="https://www.sololearn.com/certificates/CC-DMCIF08K" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">Sololearn</span>
+        </div>
+        <h3 class="cert-card__title">Machine Learning</h3>
+        <span class="cert-card__date">Apr 2024</span>
+      </a>
+      
+      <a href="#" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">telc</span>
+        </div>
+        <h3 class="cert-card__title">Deutsch C1 Hochschule</h3>
+        <span class="cert-card__date">Sep 2024</span>
+      </a>
+      
+      <a href="#" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">Digitalyst Agency</span>
+        </div>
+        <h3 class="cert-card__title">Praktikum Bescheinigung</h3>
+        <span class="cert-card__date">2024–2025</span>
+      </a>
+      
+      <a href="#" target="_blank" class="cert-card fade-in">
+        <div class="cert-card__header">
+          <div class="cert-card__icon">🎓</div>
+          <span class="cert-card__issuer">Shiraz University</span>
+        </div>
+        <h3 class="cert-card__title">ICAHT 2021 Congress</h3>
+        <span class="cert-card__date">Dec 2021</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ===== CONTACT ===== -->
-<section class="contact section" id="contact">
-  <h2 class="section__title"><span class="rtl-text">تماس</span><span class="ltr-text">Contact</span></h2>
-  <span class="section__subtitle"><span class="rtl-text">بیا در تماس باشیم</span><span class="ltr-text">Get in Touch</span></span>
-  <div class="contact__container container grid">
-    <div>
-      <div class="contact__information"><i class="uil uil-phone contact__icon"></i><div><h3 class="contact__title"><span class="rtl-text">تلفن</span><span class="ltr-text">Phone</span></h3><span class="contact__subtitle">+98 902 200 88 09</span></div></div>
-      <div class="contact__information"><i class="uil uil-envelope contact__icon"></i><div><h3 class="contact__title">Email</h3><span class="contact__subtitle">arefkazemi42@gmail.com</span></div></div>
-      <div class="contact__information"><i class="uil uil-map-marker contact__icon"></i><div><h3 class="contact__title"><span class="rtl-text">موقعیت</span><span class="ltr-text">Location</span></h3><span class="contact__subtitle"><span class="rtl-text">شیراز، ایران</span><span class="ltr-text">Shiraz, Iran</span></span></div></div>
-    </div>
-    <form class="contact__form grid" id="contactForm">
-      <div class="contact__inputs grid">
-        <div class="contact__content"><label for="name" class="contact__label"><span class="rtl-text">نام</span><span class="ltr-text">Name</span></label><input type="text" id="name" class="contact__input"></div>
-        <div class="contact__content"><label for="email" class="contact__label">Email</label><input type="email" id="email" class="contact__input"></div>
+<section class="section section--alt" id="contact">
+  <div class="container">
+    <div class="contact__grid">
+      <div class="contact__info fade-in">
+        <h2>Let's Work Together</h2>
+        <p style="color: var(--color-text-secondary); margin-bottom: var(--space-8);">
+          I'm currently seeking Data Science/ML opportunities in Germany. 
+          Let's connect and discuss how I can contribute to your team.
+        </p>
+        
+        <div class="contact__item">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact__item-label">Email</div>
+            <div class="contact__item-value">arefkazemi42@gmail.com</div>
+          </div>
+        </div>
+        
+        <div class="contact__item">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact__item-label">Location</div>
+            <div class="contact__item-value">Shiraz, Iran → Germany</div>
+          </div>
+        </div>
+        
+        <div class="contact__item">
+          <div class="contact__item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact__item-label">LinkedIn</div>
+            <div class="contact__item-value">
+              <a href="https://linkedin.com/in/ali-kzm" target="_blank" style="color: var(--color-accent-light);">
+                linkedin.com/in/ali-kzm
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="contact__content"><label for="subject" class="contact__label"><span class="rtl-text">موضوع</span><span class="ltr-text">Subject</span></label><input type="text" id="subject" class="contact__input"></div>
-      <div class="contact__content"><label for="message" class="contact__label"><span class="rtl-text">پیام</span><span class="ltr-text">Message</span></label><textarea id="message" rows="5" class="contact__input"></textarea></div>
-      <div><button type="submit" class="button button--flex"><span class="rtl-text">ارسال پیام</span><span class="ltr-text">Send</span><i class="uil uil-message button__icon"></i></button></div>
-    </form>
+      
+      <form class="contact__form fade-in" id="contactForm">
+        <div class="form__row">
+          <div class="form__group">
+            <label class="form__label" for="name">Name</label>
+            <input type="text" id="name" class="form__input" placeholder="Your name" required>
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="email">Email</label>
+            <input type="email" id="email" class="form__input" placeholder="your@email.com" required>
+          </div>
+        </div>
+        
+        <div class="form__group">
+          <label class="form__label" for="subject">Subject</label>
+          <input type="text" id="subject" class="form__input" placeholder="How can I help you?">
+        </div>
+        
+        <div class="form__group">
+          <label class="form__label" for="message">Message</label>
+          <textarea id="message" class="form__textarea" placeholder="Your message..." rows="5" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn--primary" style="align-self: flex-start;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+      </form>
+    </div>
   </div>
 </section>
 </main>
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
-  <div class="footer__bg">
-    <div class="footer__container container grid">
+  <div class="container">
+    <div class="footer__grid">
       <div>
-        <h1 class="footer__title"><span class="rtl-text">علی کاظمی</span><span class="ltr-text">Ali Kazemi</span></h1>
-        <span class="footer__subtitle"><span class="rtl-text">دانشمند داده و مهندس یادگیری ماشین</span><span class="ltr-text">Data Scientist & ML Engineer</span></span>
-        <p style="margin-top:.5rem;font-size:.8rem;color:rgba(255,255,255,.5)"><a href="/builder/" style="color:var(--first-light);text-decoration:underline"><span class="rtl-text">🧩 پورتفولیو خودت رو بساز</span><span class="ltr-text">🧩 Build your own portfolio</span></a></p>
+        <a href="#" class="nav__logo" style="color: white;">
+          <img src="/favicon.png" alt="AK" class="nav__logo-img">
+          <span>Ali Kazemi</span>
+        </a>
+        <p class="footer__brand-description">
+          Data Scientist & ML Engineer building intelligent tools with Python, TensorFlow, and modern web technologies.
+        </p>
+        <div class="footer__socials">
+          <a href="https://github.com/Arefmtl" target="_blank" class="footer__social" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/ali-kzm" target="_blank" class="footer__social" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
       </div>
-      <ul class="footer__links">
-        <li><a href="#skills" class="footer__link"><span class="rtl-text">مهارت‌ها</span><span class="ltr-text">Skills</span></a></li>
-        <li><a href="#portfolio" class="footer__link"><span class="rtl-text">نمونه‌کار</span><span class="ltr-text">Portfolio</span></a></li>
-        <li><a href="#contact" class="footer__link"><span class="rtl-text">تماس</span><span class="ltr-text">Contact</span></a></li>
-      </ul>
-      <div class="footer__socials">
-        <a href="https://github.com/Arefmtl" target="_blank" class="footer__social"><i class="uil uil-github-alt"></i></a>
-        <a href="https://linkedin.com/in/ali-kzm" target="_blank" class="footer__social"><i class="uil uil-linkedin-alt"></i></a>
+      
+      <div>
+        <h4 class="footer__heading">Quick Links</h4>
+        <ul class="footer__links">
+          <li><a href="#about" class="footer__link">About</a></li>
+          <li><a href="#skills" class="footer__link">Skills</a></li>
+          <li><a href="#projects" class="footer__link">Projects</a></li>
+          <li><a href="#contact" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="footer__heading">Resources</h4>
+        <ul class="footer__links">
+          <li><a href="/resume.pdf" class="footer__link" target="_blank">Resume</a></li>
+          <li><a href="https://github.com/Arefmtl" class="footer__link" target="_blank">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/ali-kzm" class="footer__link" target="_blank">LinkedIn</a></li>
+        </ul>
       </div>
     </div>
-    <p class="footer__copy">© 2025 Ali Kazemi</p>
+    
+    <div class="footer__bottom">
+      <span>© 2025 Ali Kazemi. All rights reserved.</span>
+      <span>Built with passion & data</span>
+    </div>
   </div>
 </footer>
 
-<a href="#" class="scrollup" id="scroll-up"><i class="uil uil-arrow-up scrollup__icon"></i></a>
-
 <script>
-// ── Mobile menu ──
-const nm=document.getElementById('nav-menu'),nt=document.getElementById('nav-toggle'),nc=document.getElementById('nav-close');
-nt?.addEventListener('click',()=>nm.classList.add('show-menu'));
-nc?.addEventListener('click',()=>nm.classList.remove('show-menu'));
-document.querySelectorAll('.nav__link').forEach(l=>l.addEventListener('click',()=>nm.classList.remove('show-menu')));
+// ═══════════════════════════════════════════════════
+// SCROLL ANIMATIONS
+// ═══════════════════════════════════════════════════
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
 
-// ── Skills accordion ──
-document.querySelectorAll('.skills__header').forEach(h=>{h.addEventListener('click',function(){
-  document.querySelectorAll('.skills__content').forEach(c=>c.className='skills__content skills__close');
-  if(this.parentNode.className.includes('skills__close')) this.parentNode.className='skills__content skills__open';
-})});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
 
-// ── Qualification tabs ──
-document.querySelectorAll('[data-target]').forEach(t=>t.addEventListener('click',()=>{
-  const target=document.querySelector(t.dataset.target);
-  document.querySelectorAll('[data-content]').forEach(c=>{c.classList.remove('qualification__active');c.style.display='none'});
-  target.classList.add('qualification__active');target.style.display='block';
-  document.querySelectorAll('[data-target]').forEach(b=>b.classList.remove('qualification__active'));
-  t.classList.add('qualification__active');
-}));
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+// ═══════════════════════════════════════════════════
+// HEADER SCROLL
+// ═══════════════════════════════════════════════════
+let lastScroll = 0;
+const header = document.getElementById('header');
 
-// ── Scrollspy + effects ──
-const sc=document.querySelectorAll('section[id]');
-window.addEventListener('scroll',()=>{
-  const y=window.pageYOffset;
-  sc.forEach(s=>{const h=s.offsetHeight,t=s.offsetTop-50,i=s.getAttribute('id');
-    document.querySelector('.nav__menu a[href*='+i+']')?.classList.toggle('active-link',y>t&&y<=t+h)});
-  document.getElementById('header')?.classList.toggle('scroll-header',y>=80);
-  document.getElementById('scroll-up')?.classList.toggle('show-scroll',y>=560);
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll <= 0) {
+    header.classList.remove('hidden');
+    return;
+  }
+  
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    header.classList.add('hidden');
+  } else {
+    header.classList.remove('hidden');
+  }
+  
+  lastScroll = currentScroll;
 });
 
-// ── Dark/Light theme ──
-const tb=document.getElementById('theme-button');
-const st=localStorage.getItem('selected-theme'),si=localStorage.getItem('selected-icon');
-const gt=()=>document.body.classList.contains('dark')?'dark':'light';
-const gi=()=>tb.classList.contains('uil-sun')?'uil-moon':'uil-sun';
-if(st){document.body.classList[st==='dark'?'add':'remove']('dark');tb.classList[si==='uil-moon'?'add':'remove']('uil-sun')}
-tb?.addEventListener('click',()=>{document.body.classList.toggle('dark');tb.classList.toggle('uil-sun');localStorage.setItem('selected-theme',gt());localStorage.setItem('selected-icon',gi())});
+// ═══════════════════════════════════════════════════
+// ACTIVE NAV LINK
+// ═══════════════════════════════════════════════════
+const sections = document.querySelectorAll('section[id]');
 
-// ── Language toggle ──
-const lt=document.getElementById('lang-toggle'),h=document.documentElement;
-const sl=localStorage.getItem('selected-lang')||'fa';
-if(sl==='en'){h.lang='en';h.dir='ltr';lt.textContent='FA'}
-lt?.addEventListener('click',()=>{const isFa=h.lang==='fa';h.lang=isFa?'en':'fa';h.dir=isFa?'ltr':'rtl';lt.textContent=isFa?'FA':'EN';localStorage.setItem('selected-lang',isFa?'en':'fa')});
+window.addEventListener('scroll', () => {
+  let current = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    
+    if (pageYOffset >= sectionTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  document.querySelectorAll('.nav__link').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
 
-// ── Contact form demo ──
-document.getElementById('contactForm')?.addEventListener('submit',async(e)=>{
-  e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;
-  btn.innerHTML='<span class="rtl-text">در حال ارسال...</span><span class="ltr-text">Sending...</span>';
-  await new Promise(r=>setTimeout(r,1000));
-  alert(document.documentElement.lang==='fa'?'✅ پیام ارسال شد!':'✅ Message sent!');
-  e.target.reset();
-  btn.innerHTML='<span class="rtl-text">ارسال پیام</span><span class="ltr-text">Send</span><i class="uil uil-message button__icon"></i>';
-  btn.disabled=false;
+// ═══════════════════════════════════════════════════
+// MOBILE MENU
+// ═══════════════════════════════════════════════════
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.querySelector('.nav__links');
+
+navToggle?.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});
+
+// Close menu on link click
+document.querySelectorAll('.nav__link').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('show');
+  });
+});
+
+// ═══════════════════════════════════════════════════
+// FORM SUBMISSION
+// ═══════════════════════════════════════════════════
+const contactForm = document.getElementById('contactForm');
+
+contactForm?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(contactForm);
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const subject = formData.get('subject');
+  const message = formData.get('message');
+  
+  // Create mailto link
+  const mailtoLink = `mailto:arefkazemi42@gmail.com?subject=${encodeURIComponent(subject || 'Contact from Portfolio')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+  
+  window.location.href = mailtoLink;
 });
 </script>
-
 </body>
 </html>
